@@ -45,7 +45,7 @@ const AuthLayout = (props: { children: React.ReactNode }) => {
       </div>
 
       {/** Right/bottom Children (Sign in/up page) */}
-      <main className="flex-1 flex justify-center items-center py-10 px-2  lg:p-0">
+      <main className="flex-1 flex justify-center items-center p-6 px-2  lg:p-0">
         {props.children}
       </main>
     </div>
