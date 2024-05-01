@@ -13,9 +13,9 @@ const AuthLayout = (props: { children: React.ReactNode }) => {
     [pathname]
   );
   return (
-    <div className="flex justify-between items-center flex-col lg:flex-row  md:h-screen">
+    <div className="flex justify-between items-center flex-col lg:flex-row">
       {/** Left/Top */}
-      <div className="flex-1 h-full relative z-[1] flex items-center justify-center px-2 py-20 md:!p-10">
+      <div className="flex-1 lg:min-h-screen relative z-[1] flex items-center justify-center py-[4rem] md:py-20">
         {/** Background Behind */}
         <Image
           loading="lazy"
@@ -45,7 +45,7 @@ const AuthLayout = (props: { children: React.ReactNode }) => {
       </div>
 
       {/** Right/bottom Children (Sign in/up page) */}
-      <main className="flex-1 flex justify-center items-center p-5 lg:p-0">
+      <main className="flex-1 flex justify-center items-center mt-10 lg:mt-0">
         {props.children}
       </main>
     </div>
