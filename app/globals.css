@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /* Light theme colors */
+  :root {
+    /* Backgrounds */
+    --bg-body: #eeeeee;
+    --bg-header: #ffff;
+    --bg-sidebar: #ffff;
+    /* Text */
+    --text-primary: #5c5a5a;
+    --text-secondary: #767676;
+    /* Icons */
+    --icon-primary: #606060;
+    /* Active */
+    --active-sidebarLink: #c00;
+  }
+
+  /* Dark theme colors */
+  :root[class~="dark"] {
+    /* Backgrounds */
+    --bg-body: #1f1f1f;
+    --bg-header: #282828;
+    --bg-sidebar: #282828;
+    /* Text */
+    --text-primary: #f1f0f0;
+    --text-secondary: #aaa;
+    /* Icons */
+    --icon-primary: #aaa;
+    /* Active */
+    --active-sidebarLink: #c00;
+  }
+}
+
+.container {
+  padding: 0 2em;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 1em;
+  }
+}

@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 // Components
-const Logo = dynamic(() => import("@/components/Logo"));
+const Logo = dynamic(() => import("@/components/ui/Logo"));
 
 const AuthLayout = (props: { children: React.ReactNode }) => {
   const pathname = usePathname();

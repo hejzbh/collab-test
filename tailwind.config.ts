@@ -8,12 +8,24 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        // Backgrounds
+        "bgColors-primary": "var(--bg-body)",
+        "bgColors-header": "var(--bg-header)",
+        "bgColors-sidebar": "var(--bg-sidebar)",
+        // Text
+        "textColors-primary": "var(--text-primary)",
+        "textColors-secondary": "var(--text-secondary)",
+        // Icons
+        "iconColors-primary": "var(--icon-primary)",
+        // Active
+        "activeColors-sidebarLink": "var(--active-sidebarLink)",
       },
     },
+  },
+  darkMode: "selector",
+  corePlugins: {
+    container: false,
   },
   plugins: [],
 };
