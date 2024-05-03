@@ -10,28 +10,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       {/** Header */}
       <Header className="fixed top-0 left-0 w-full h-[4.3rem]" />
       {/** Sidebar & Main */}
-      <div className="flex  space-x-10">
+      <div className="flex ">
         <Sidebar className="sticky left-0 top-0 h-screen pt-[4.3rem]" />
-        <main className="pt-[4.3rem]">
-          {children}
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-          <h1 className="block w-full mb-20">dssss</h1>
-        </main>
+        <main className="pt-[4.3rem] w-full">{children}</main>
       </div>
     </div>
   );

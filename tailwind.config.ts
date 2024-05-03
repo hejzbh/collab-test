@@ -13,6 +13,7 @@ const config: Config = {
         "bgColors-primary": "var(--bg-body)",
         "bgColors-header": "var(--bg-header)",
         "bgColors-sidebar": "var(--bg-sidebar)",
+
         // Text
         "textColors-primary": "var(--text-primary)",
         "textColors-secondary": "var(--text-secondary)",
@@ -20,6 +21,8 @@ const config: Config = {
         "iconColors-primary": "var(--icon-primary)",
         // Active
         "activeColors-sidebarLink": "var(--active-sidebarLink)",
+        // Other
+        red: "#c00",
       },
     },
   },

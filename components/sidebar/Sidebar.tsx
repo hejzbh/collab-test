@@ -4,7 +4,9 @@ import dynamic from "next/dynamic";
 import { useSidebarConfig } from "@/store/sidebar-config-store";
 // Components
 const SidebarLinks = dynamic(() => import("./SidebarLinks"));
-const UserSummaryInfo = dynamic(() => import("@/components/UserSummaryInfo"));
+const UploadModalToggler = dynamic(
+  () => import("@/components/togglers/UploadModalToggler")
+);
 
 // Props
 interface SidebarProps {
@@ -22,7 +24,7 @@ const Sidebar = ({ className }: SidebarProps) => {
     >
       <div className="container flex flex-col justify-between !py-5 h-full">
         <SidebarLinks expanded={isSidebarExpanded} />
-        <UserSummaryInfo expanded={isSidebarExpanded} />
+        <UploadModalToggler expanded={isSidebarExpanded} />
       </div>
     </aside>
   );

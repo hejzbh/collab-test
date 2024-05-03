@@ -5,6 +5,7 @@ import { Open_Sans } from "next/font/google";
 // Providers
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import ModalProvider from "@/components/providers/ModalProvider";
 
 const font = Open_Sans({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
       <html lang="en">
         <ThemeProvider>
           <body className={`${font.className} bg-bgColors-primary`}>
+            <ModalProvider />
             {children}
           </body>
         </ThemeProvider>

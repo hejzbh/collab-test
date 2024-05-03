@@ -9,7 +9,7 @@ export type ThemeMode = "dark" | "light";
 
 type ThemeProviderValue = {
   theme: ThemeMode;
-  changeTheme: (mode?: ThemeMode) => void; // eslint-disable-line
+  changeTheme: (mode?: ThemeMode) => void;
 };
 
 const ThemeContext = createContext<ThemeProviderValue>({
