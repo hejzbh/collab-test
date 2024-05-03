@@ -13,10 +13,12 @@ const config: Config = {
         "bgColors-primary": "var(--bg-body)",
         "bgColors-header": "var(--bg-header)",
         "bgColors-sidebar": "var(--bg-sidebar)",
-
+        "bgColors-modal": "var(--bg-modal)",
+        "bgColors-input": "var(--bg-input)",
         // Text
         "textColors-primary": "var(--text-primary)",
         "textColors-secondary": "var(--text-secondary)",
+        "textColors-label": "#56565A",
         // Icons
         "iconColors-primary": "var(--icon-primary)",
         // Active

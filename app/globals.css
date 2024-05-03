@@ -9,6 +9,8 @@
     --bg-body: #eeeeee;
     --bg-header: #ffff;
     --bg-sidebar: #ffff;
+    --bg-modal: #ffff;
+    --bg-input: #f2f2f2;
     /* Text */
     --text-primary: #5c5a5a;
     --text-secondary: #767676;
@@ -24,6 +26,8 @@
     --bg-body: #1f1f1f;
     --bg-header: #282828;
     --bg-sidebar: #282828;
+    --bg-modal: #1b1c20;
+    --bg-input: #16151a;
     /* Text */
     --text-primary: #f1f0f0;
     --text-secondary: #aaa;

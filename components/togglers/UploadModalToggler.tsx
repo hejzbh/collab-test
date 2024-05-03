@@ -23,7 +23,7 @@ const UploadModalToggler = ({ expanded }: UploadModalTogglerProps) => {
       title="Upload Video"
       className={
         expanded
-          ? "bg-[#3B3B3B]/10 dark:bg-[#1F1F1F] rounded-xl shadow-md p-2 border-[2px] border-dashed border-white/40 flex flex-col justify-center items-center transition-all duration-300 ease-in-out hover:bg-[#101010]/15 hover:dark:bg-[#101010]"
+          ? "bg-[#3B3B3B]/10 dark:bg-[#1F1F1F] rounded-xl shadow-md p-2 flex flex-col justify-center items-center transition-all duration-300 ease-in-out hover:bg-[#101010]/15 hover:dark:bg-[#101010]"
           : "flex items-center justify-center"
       }
     >

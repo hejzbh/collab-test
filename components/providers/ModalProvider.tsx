@@ -18,7 +18,9 @@ const ModalProvider = ({}: ModalProviderProps) => {
     case "upload":
       const UploadModal = dynamic(
         () => import("@/components/modals/UploadModal"),
-        { loading: () => <Loader /> }
+        {
+          loading: () => <Loader />,
+        }
       );
       return (
         <Modal>

@@ -7,10 +7,10 @@ interface LoaderProps {
   size?: number;
 }
 
-const Loader = ({ className = "", size = 30 }: LoaderProps) => {
+const Loader = ({ className = "", size = 70 }: LoaderProps) => {
   return (
     <LoaderIcon
-      className={`animate-spin duration-1000 ${className}`}
+      className={`animate-spin duration-1000 text-red ${className}`}
       size={size}
     />
   );
