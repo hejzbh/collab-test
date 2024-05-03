@@ -21,7 +21,7 @@ const UploadVideoForm = ({}: UploadVideoFormProps) => {
     title: "",
     description: "",
   });
-  const [loading, setLoading] = useState<boolean>(false);
+  //const [loading, setLoading] = useState<boolean>(false);
   const isSubmitDisabled = useMemo(
     () => !formData.videoUrl || !formData.title,
     [formData]
