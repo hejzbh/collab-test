@@ -25,7 +25,7 @@ const HeaderActions = ({}: HeaderActionsProps) => {
     <FlexGroup>
       <Button
         onClick={() => openModal("upload")}
-        title="Upload Video"
+        title="Upload Clip"
         Icon={UploadIcon}
         className="flex flex-row-reverse items-center"
         iconProps={{ size: 20, className: "mr-2" }}
