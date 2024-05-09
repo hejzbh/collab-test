@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid()) @map("_id")
+  email String @db.String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clips Clip[]
+}
+
+model Clip {
+    id String @id @default(uuid()) @map("_id")
+
+    videoUrl String @db.String
+    userId String
+    user User @relation(fields: [userId],references: [id],onDelete:Cascade)
+    matching Matching[]
+
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+
+    @@index([userId])
+} 
+
+model Video {
+    id String @id @default(uuid()) @map("_id")
+    youtubeId String @db.String @unique
+    matching Matching[]
+
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+}
+
+
+model Matching {
+    id String @id @default(uuid()) @map("_id")
+
+    clipId String
+    clip Clip @relation(fields: [clipId],references: [id],onDelete:Cascade)
+
+    videoId String
+    video Video @relation(fields: [videoId],references: [id],onDelete:Cascade)
+
+    startTimeClip Int
+    endTimeClip Int
+    startTimeVideo Int
+    endTimeVideo Int
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([clipId])
+    @@index([videoId])
+}
+
+

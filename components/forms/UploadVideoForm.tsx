@@ -9,26 +9,30 @@ interface UploadVideoFormProps {
   className?: string;
 }
 
-interface FormData {
-  videoUrl: string;
+export interface UploadVideoFormData {
+  file: File | undefined;
   title: string;
   description?: string;
 }
 
 const UploadVideoForm = ({}: UploadVideoFormProps) => {
-  const [formData, setFormData] = useState<FormData>({
-    videoUrl: "",
+  const [formData, setFormData] = useState<UploadVideoFormData>({
     title: "",
     description: "",
+    file: undefined,
   });
   //const [loading, setLoading] = useState<boolean>(false);
   const isSubmitDisabled = useMemo(
-    () => !formData.videoUrl || !formData.title,
+    () => !formData.file || !formData.title,
     [formData]
   );
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    import("@/lib/(upload)/upload-clip").then(({ uploadClip }) => {
+      uploadClip(formData);
+    });
 
     try {
     } catch {}
@@ -40,6 +44,12 @@ const UploadVideoForm = ({}: UploadVideoFormProps) => {
       [e.target.name]: e.target.value,
     }));
 
+  const onVideoFileChange = (file: File | undefined) =>
+    setFormData((formData) => ({
+      ...formData,
+      file,
+    }));
+
   return (
     <form onSubmit={onFormSubmit} className="space-y-8 w-full">
       {/** Upload Video */}
@@ -47,7 +57,7 @@ const UploadVideoForm = ({}: UploadVideoFormProps) => {
         <label htmlFor="upload" className="text-textColors-label block mb-1">
           Video
         </label>
-        <Dropzone />
+        <Dropzone onChange={onVideoFileChange} />
       </div>
       {/** Title */}
       <div>
