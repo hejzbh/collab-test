@@ -36,14 +36,13 @@ const UploadModalToggler = ({ expanded }: UploadModalTogglerProps) => {
         <UploadIcon className="text-white" size={22} />
       </span>
 
-      {expanded && (
-        <Shortcut
-          keys={["CTRL", "s"]}
-          onShortcutPress={() => {
-            toggleModal("upload");
-          }}
-        />
-      )}
+      <Shortcut
+        className={expanded ? "hidden" : ""}
+        keys={["CTRL", "s"]}
+        onShortcutPress={() => {
+          toggleModal("upload");
+        }}
+      />
     </button>
   );
 };
