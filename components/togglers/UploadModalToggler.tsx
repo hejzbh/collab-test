@@ -37,7 +37,7 @@ const UploadModalToggler = ({ expanded }: UploadModalTogglerProps) => {
       </span>
 
       <Shortcut
-        className={expanded ? "hidden" : ""}
+        className={expanded ? "" : "hidden"}
         keys={["CTRL", "s"]}
         onShortcutPress={() => {
           toggleModal("upload");
