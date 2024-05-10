@@ -16,9 +16,9 @@ export const initUser = async function () {
       },
       create: {
         id: clerkUser.id,
-        email: clerkUser.primaryEmailAddress?.emailAddress + "",
+        email: clerkUser?.emailAddresses[0]?.emailAddress,
       },
-      update: { email: clerkUser.primaryEmailAddress?.emailAddress + "" },
+      update: { email: clerkUser?.emailAddresses[0]?.emailAddress + "" },
     });
 
     return user;

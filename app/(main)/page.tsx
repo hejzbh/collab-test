@@ -14,6 +14,7 @@ type HomePageProps = {
     selectedClipId?: string;
     searchQuery?: string;
     sortBy?: any;
+    userHasClips?: string;
   };
 };
 
@@ -41,10 +42,10 @@ export const getData = async function (
 export default async function HomePage({ searchParams }: HomePageProps) {
   const { clips, matchingVideos } = await getData(searchParams);
 
-  const userHasNoClips = !clips || !clips?.length; // !clips || !clips?.length
+  const userHasNoClips = !searchParams?.userHasClips; // !clips || !clips?.length
 
   return (
-    <main className="h-full w-full text-3xl text-white font-semibold">
+    <main className="h-full w-full">
       {userHasNoClips ? (
         <NoClipsUploaded />
       ) : (

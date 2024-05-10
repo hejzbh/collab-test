@@ -16,6 +16,8 @@
     --text-secondary: #767676;
     /* Icons */
     --icon-primary: #606060;
+    /* Borders */
+    --border-primary: rgba(0, 0, 0, 0.1);
     /* Active */
     --active-sidebarLink: #c00;
   }
@@ -33,9 +35,17 @@
     --text-secondary: #aaa;
     /* Icons */
     --icon-primary: #aaa;
+    /* Borders */
+    --border-primary: rgba(255, 255, 255, 0.1);
     /* Active */
     --active-sidebarLink: #c00;
   }
+}
+
+body,
+html,
+input {
+  font-size: 14px;
 }
 
 .container {

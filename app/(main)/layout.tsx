@@ -22,8 +22,10 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
         <Header className="fixed top-0 left-0 w-full h-[4.3rem]" />
         {/** Sidebar & Main */}
         <div className="flex ">
-          <Sidebar className="sticky left-0 top-0 h-screen pt-[4.3rem]" />
-          <main className="pt-[4.2rem] w-full">{children}</main>
+          <Sidebar className="fixed md:sticky left-0 top-0 h-screen pt-[4.3rem] z-[100]" />
+          <main className="pt-[4.2rem] w-full h-screen overflow-hidden">
+            {children}
+          </main>
         </div>
       </div>
     </UserProvider>

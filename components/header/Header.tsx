@@ -15,7 +15,7 @@ interface HeaderProps {
 const Header = async ({ className = "" }: HeaderProps) => {
   return (
     <header
-      className={`shadow-none dark:shadow-xl bg-bgColors-header z-10 ${className}`}
+      className={`shadow-none dark:shadow-xl bg-bgColors-header z-[1000] ${className}`}
     >
       <div className="container h-full flex items-center justify-between">
         {/** Sidebar Toggler & Logo */}

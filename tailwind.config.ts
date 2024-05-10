@@ -23,6 +23,8 @@ const config: Config = {
         "iconColors-primary": "var(--icon-primary)",
         // Active
         "activeColors-sidebarLink": "var(--active-sidebarLink)",
+        // Border
+        "borderColors-primary": "var(--border-primary)",
         // Other
         red: "#c00",
       },

@@ -26,7 +26,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <ThemeProvider>
-          <body className={`${font.className} bg-bgColors-primary`}>
+          <body className={`${font.className} bg-bgColors-primary h-screen`}>
             <ModalProvider />
             {children}
           </body>

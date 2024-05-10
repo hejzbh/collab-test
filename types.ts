@@ -10,3 +10,8 @@ export type SidebarLinkType = {
 };
 
 export type SidebarLinksType = SidebarLinkType[];
+
+export type SortOptionType = {
+  title: string;
+  key: string;
+};

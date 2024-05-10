@@ -10,7 +10,7 @@ interface SidebarConfigStore {
 
 export const useSidebarConfig = create<SidebarConfigStore>((set) => ({
   data: undefined,
-  isSidebarExpanded: true,
+  isSidebarExpanded: window?.innerWidth > 768,
   toggleSidebarExpandStatus: (status?: boolean) => {
     set((previousState) => ({
       ...previousState,
