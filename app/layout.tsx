@@ -1,19 +1,11 @@
 import "./globals.css";
-import dynamic from "next/dynamic";
+
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 // Providers
 import { ClerkProvider } from "@clerk/nextjs";
-
-const NotificationsProvider = dynamic(
-  () => import("@/components/providers/NotificationsProvider")
-);
-const ModalProvider = dynamic(
-  () => import("@/components/providers/ModalProvider")
-);
-const ThemeProvider = dynamic(
-  () => import("@/components/providers/ThemeProvider")
-);
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import ModalProvider from "@/components/providers/ModalProvider";
 
 const font = Open_Sans({
   subsets: ["latin"],
@@ -32,15 +24,14 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <ThemeProvider>
-        <html lang="en">
+      <html lang="en">
+        <ThemeProvider>
           <body className={`${font.className} bg-bgColors-primary h-screen`}>
             <ModalProvider />
-            <NotificationsProvider />
             {children}
           </body>
-        </html>
-      </ThemeProvider>
+        </ThemeProvider>
+      </html>
     </ClerkProvider>
   );
 }
