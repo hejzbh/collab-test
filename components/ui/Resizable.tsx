@@ -8,15 +8,17 @@ import { clsx } from "@/utils/clsx";
 const ResizablePanelGroup = ({
   className,
   ...props
-}: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => (
-  <ResizablePrimitive.PanelGroup
-    className={clsx(
-      "flex h-full w-full data-[panel-group-direction=vertical]:flex-col",
-      className
-    )}
-    {...props}
-  />
-);
+}: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => {
+  return (
+    <ResizablePrimitive.PanelGroup
+      className={clsx(
+        "flex h-full w-full data-[panel-group-direction=vertical]:flex-col",
+        className
+      )}
+      {...props}
+    />
+  );
+};
 
 const ResizablePanel = ResizablePrimitive.Panel;
 

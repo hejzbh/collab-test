@@ -24,15 +24,14 @@ model User {
 
 model Clip {
     id String @id @default(uuid()) @map("_id")
-
+    title String @db.String
     videoUrl String @db.String
     userId String
     user User @relation(fields: [userId],references: [id],onDelete:Cascade)
     matching Matching[]
-
-   createdAt DateTime @default(now())
-   updatedAt DateTime @updatedAt
-
+    thumbnail String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
     @@index([userId])
 } 
 
@@ -40,9 +39,10 @@ model Video {
     id String @id @default(uuid()) @map("_id")
     youtubeId String @db.String @unique
     matching Matching[]
-
-   createdAt DateTime @default(now())
-   updatedAt DateTime @updatedAt
+    title String @db.String
+    thumbnail String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
 
 

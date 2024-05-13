@@ -58,3 +58,7 @@ input {
     padding: 0 1em;
   }
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

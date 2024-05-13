@@ -19,6 +19,7 @@ const config: Config = {
         "textColors-primary": "var(--text-primary)",
         "textColors-secondary": "var(--text-secondary)",
         "textColors-label": "#56565A",
+        "textColors-blue": "#3ea6ff",
         // Icons
         "iconColors-primary": "var(--icon-primary)",
         // Active

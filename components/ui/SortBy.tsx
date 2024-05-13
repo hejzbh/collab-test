@@ -25,7 +25,7 @@ const SortBy = ({}: SortByProps) => {
         <div className="flex items-center space-x-2">
           <div className="border-[1px] border-borderColors-primary p-2 px-3 rounded-xl text-[12px] md:text-[14px] flex items-center">
             <span className="text-[11px] md:text-[13px] mr-2">Sort by:</span>
-            <p className="!text-activeColors-sidebarLink">Upload date</p>
+            <p className="!text-textColors-blue">Upload date</p>
           </div>
           <button
             onClick={(e) => {
@@ -40,12 +40,12 @@ const SortBy = ({}: SortByProps) => {
           >
             <MoveUpIcon
               className={`p-0 w-[17px] md:w-[21px] ${
-                direction === "asc" && "text-activeColors-sidebarLink"
+                direction === "asc" && "text-textColors-blue"
               }`}
             />
             <MoveDownIcon
               className={`p-0 w-[17px] md:w-[21px] ${
-                direction === "desc" && "text-activeColors-sidebarLink"
+                direction === "desc" && "text-textColors-blue"
               }`}
             />
           </button>

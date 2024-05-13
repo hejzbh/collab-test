@@ -17,7 +17,7 @@ const ClickExpandable = ({
 
   return (
     <div className={`relative ${className}`}>
-      <button onClick={() => setExpanded((expanded) => !expanded)}>
+      <button onClick={() => setExpanded((expanded) => !expanded)} title="Click">
         {TrigerElement}
       </button>
       <div

@@ -3,17 +3,26 @@
 import React, { useRef, useState } from "react";
 // Icons
 import { FileUpIcon } from "lucide-react";
+import dynamic from "next/dynamic";
+import { useNotifications } from "@/store/notifications-store";
 
 // Props
 interface DropzoneProps {
   className?: string;
   onChange: (file?: File) => void; // eslint-disable-line
+  allowedFileExtenstions?: string[];
 }
 
-const Dropzone = ({ onChange, className = "" }: DropzoneProps) => {
+const Dropzone = ({
+  onChange,
+  className = "",
+  allowedFileExtenstions,
+}: DropzoneProps) => {
   const [dragging, setDragging] = useState<boolean>(false);
   const [file, setFile] = useState<File>();
   const inputRef: any = useRef();
+
+  const { showNotification } = useNotifications();
 
   function onClick() {
     if (!inputRef) return;
@@ -40,9 +49,44 @@ const Dropzone = ({ onChange, className = "" }: DropzoneProps) => {
   };
 
   function handleFile(files: FileList) {
+    // 1) Get file
     const file = files[0];
+
+    // 2) Get file extenstion
+    const fileExtenstion = file.name.split(".").pop() + "";
+
+    // 3) If there are allowed file extenstions, check does this file fits in.
+    if (
+      allowedFileExtenstions?.length &&
+      allowedFileExtenstions?.indexOf(fileExtenstion) === -1
+    ) {
+      showNotification({
+        title: "File Extenstion",
+        message: `Please upload ${allowedFileExtenstions.join(" ")} file`,
+        variant: "error",
+      });
+      return;
+    }
+
+    // 4)
     setFile(file);
     onChange(file);
+  }
+
+  if (file) {
+    const FilePreview = dynamic(() => import("@/components/ui/FilePreview"), {
+      loading: () => <></>,
+    });
+
+    return (
+      <FilePreview
+        file={file}
+        onDelete={() => {
+          setFile(undefined);
+          onChange(undefined);
+        }}
+      />
+    );
   }
 
   return (
@@ -59,12 +103,11 @@ const Dropzone = ({ onChange, className = "" }: DropzoneProps) => {
         DROP FILE HERE
         <span className="block font-[500]">
           or{" "}
-          <span className="text-red underline cursor-pointer ml-1">CLICK</span>
+          <span className="text-textColors-blue underline cursor-pointer ml-1">
+            CLICK
+          </span>
         </span>
       </h2>
-
-      {/** If file exists */}
-      {file && <p>{file?.name}</p>}
 
       {/** File input */}
       <input

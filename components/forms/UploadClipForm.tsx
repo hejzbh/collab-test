@@ -5,18 +5,18 @@ const Button = dynamic(() => import("@/components/ui/Button"));
 const Dropzone = dynamic(() => import("@/components/ui/Dropzone"));
 
 // Props
-interface UploadVideoFormProps {
+interface UploadClipFormProps {
   className?: string;
 }
 
-export interface UploadVideoFormData {
+export interface UploadClipFormData {
   file: File | undefined;
   title: string;
   description?: string;
 }
 
-const UploadVideoForm = ({}: UploadVideoFormProps) => {
-  const [formData, setFormData] = useState<UploadVideoFormData>({
+const UploadClipForm = ({}: UploadClipFormProps) => {
+  const [formData, setFormData] = useState<UploadClipFormData>({
     title: "",
     description: "",
     file: undefined,
@@ -57,8 +57,12 @@ const UploadVideoForm = ({}: UploadVideoFormProps) => {
         <label htmlFor="upload" className="text-textColors-label block mb-1">
           Video
         </label>
-        <Dropzone onChange={onVideoFileChange} />
+        <Dropzone
+          onChange={onVideoFileChange}
+          allowedFileExtenstions={["mp4"]}
+        />
       </div>
+
       {/** Title */}
       <div>
         <label htmlFor="title" className="text-textColors-label block mb-1">
@@ -71,6 +75,7 @@ const UploadVideoForm = ({}: UploadVideoFormProps) => {
           className="w-full outline-none rounded-xl p-3 bg-bgColors-input text-sm text-textColors-primary border-[1px] border-[#D8D7D5] dark:border-none "
         />
       </div>
+
       {/** Description */}
       <div>
         <label
@@ -87,14 +92,15 @@ const UploadVideoForm = ({}: UploadVideoFormProps) => {
         />
       </div>
 
+      {/** Submit */}
       <Button
         title={"Submit"}
         type="submit"
         disabled={isSubmitDisabled}
-        className={`float-right disabled:opacity-60`}
+        className={`float-right disabled:opacity-60 bg-textColors-blue border-textColors-blue hover:text-textColors-blue`}
       />
     </form>
   );
 };
 
-export default UploadVideoForm;
+export default UploadClipForm;

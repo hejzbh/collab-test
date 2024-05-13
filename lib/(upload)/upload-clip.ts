@@ -1,4 +1,4 @@
-import { UploadVideoFormData } from "@/components/forms/UploadVideoForm";
+import { UploadVideoFormData } from "@/components/forms/UploadClipForm";
 import { uploadFile } from "./upload-file";
 
 export const uploadClip = async (data: UploadVideoFormData) => {

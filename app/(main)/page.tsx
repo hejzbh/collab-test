@@ -1,5 +1,7 @@
 //import { currentUser } from "@clerk/nextjs/server";
-import { Clip } from "@prisma/client";
+import { dummyClips } from "@/constants/clips";
+import { dummyVideos } from "@/constants/videos";
+import { Clip, Video } from "@prisma/client";
 // Next
 import dynamic from "next/dynamic";
 // Components
@@ -8,13 +10,13 @@ const NoClipsUploaded = dynamic(
 );
 const MainContent = dynamic(() => import("@/components/main/MainContent"));
 
-type HomePageProps = {
+export type HomePageProps = {
   params: {};
   searchParams: {
     selectedClipId?: string;
+    selectedVideoId?: string;
     searchQuery?: string;
     sortBy?: any;
-    userHasClips?: string;
   };
 };
 
@@ -25,31 +27,37 @@ export const getData = async function (
   // const user = await currentUser();
 
   // 2) Get user's clips
-  const clips: Clip[] = [];
+  const clips: Clip[] = dummyClips;
 
   // 3) If the user has selected one of the clips, retrieve matching videos.
+  let matchingVideos: Video[] = [];
+
   if (searchParams.selectedClipId) {
     // Fetch matching videos
-    console.log(searchParams);
+    matchingVideos = dummyVideos;
   }
 
   return {
-    clips: clips,
-    matchingVideos: [],
+    clips,
+    matchingVideos,
   };
 };
 
 export default async function HomePage({ searchParams }: HomePageProps) {
   const { clips, matchingVideos } = await getData(searchParams);
 
-  const userHasNoClips = !searchParams?.userHasClips; // !clips || !clips?.length
+  const userHasNoClips = false; // !clips || !clips?.length
 
   return (
-    <main className="h-full w-full">
+    <main className="h-full w-full overflow-hidden">
       {userHasNoClips ? (
         <NoClipsUploaded />
       ) : (
-        <MainContent clips={clips} matchingVideos={matchingVideos} />
+        <MainContent
+          clips={clips}
+          matchingVideos={matchingVideos}
+          searchParams={searchParams}
+        />
       )}
     </main>
   );
