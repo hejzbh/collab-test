@@ -18,7 +18,7 @@ const Sidebar = ({ className }: SidebarProps) => {
 
   return (
     <aside
-      className={`bg-bgColors-sidebar w-full transition-all md:transition-[max-width] duration-300 ease-in-out  ${
+      className={`bg-bgColors-sidebar w-full h-full transition-all md:transition-[max-width] duration-300 ease-in-out  ${
         isSidebarExpanded
           ? "max-w-[300px] translate-x-0"
           : "translate-x-[-100%] md:translate-x-0 md:max-w-[90px]"

@@ -1,16 +1,50 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // Icons
 import { SearchIcon, XIcon } from "lucide-react";
+import { HomePageProps } from "@/app/(main)/page";
+import { generateNewQuery } from "@/utils/generate-new-query";
+import { useRouter } from "next/navigation";
 
 // Props
 interface SearchProps {
   className?: string;
+  searchParams: HomePageProps["searchParams"];
 }
 
-const Search = ({ className }: SearchProps) => {
+let debounceTimeout: any = null;
+
+const Search = ({ className, searchParams }: SearchProps) => {
   const [value, setValue] = useState<string>("");
+  const [debouncedValue, setDebouncedValue] = useState<string>();
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    debounceTimeout = setTimeout(() => {
+      setDebouncedValue(value);
+    }, 200);
+
+    return () => clearTimeout(debounceTimeout);
+  }, [value]);
+
+  useEffect(() => {
+    if (!mounted) {
+      setMounted(true);
+      return;
+    }
+
+    router.push(
+      `/?${generateNewQuery({
+        searchParams,
+        newSearchParams: {
+          q: debouncedValue,
+        },
+      })}`
+    );
+  }, [debouncedValue]); // eslint-disable-line
 
   return (
     <form className={`relative  ${className}`}>

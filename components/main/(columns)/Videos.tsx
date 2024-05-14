@@ -3,7 +3,9 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { HomePageProps } from "@/app/(main)/page";
 // Components
-const VideoCard = dynamic(() => import("@/components/main/VideoCard"));
+const VideoCard = dynamic(
+  () => import("@/components/main/(columns)/VideoCard")
+);
 
 // Props
 interface VideosProps {
@@ -33,9 +35,9 @@ const Videos = ({ videos = [], searchParams }: VideosProps) => {
   }
 
   return (
-    <div className="p-10 pb-[10rem] scrollbar-hide space-y-5 h-full overflow-y-scroll">
+    <div className="p-3 md:p-10 !pb-[10rem] scrollbar-hide space-y-5 h-full overflow-y-scroll">
       {videos?.map((video) => (
-        <VideoCard key={video.id} video={video} />
+        <VideoCard key={video.id} video={video} searchParams={searchParams} />
       ))}
     </div>
   );

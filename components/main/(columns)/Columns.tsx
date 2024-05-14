@@ -10,7 +10,7 @@ import { Clip, Video } from "@prisma/client";
 import { HomePageProps } from "@/app/(main)/page";
 const Clips = dynamic(() => import("./Clips"));
 const Videos = dynamic(() => import("./Videos"));
-const Matching = dynamic(() => import("./Matching"));
+const Matching = dynamic(() => import("../(matching)/Matching"));
 
 // Props
 interface ColumnsProps {
@@ -28,7 +28,7 @@ const Columns = ({
     <ResizablePanelGroup direction="horizontal">
       {/** Clips */}
       <ResizablePanel defaultSize={22}>
-        <Clips clips={clips} />
+        <Clips clips={clips} searchParams={searchParams} />
       </ResizablePanel>
 
       {/** - */}
@@ -43,7 +43,7 @@ const Columns = ({
       <ResizableHandle withHandle />
 
       {/** Matching */}
-      <ResizablePanel>
+      <ResizablePanel className="!overflow-y-scroll scrollbar-hide">
         <Matching searchParams={searchParams} />
       </ResizablePanel>
     </ResizablePanelGroup>
