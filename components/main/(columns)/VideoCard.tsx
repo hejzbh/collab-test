@@ -48,12 +48,13 @@ const VideoCard = ({ video, searchParams }: VideoCardProps) => {
           loading="lazy"
           width={350}
           height={500}
+          quality={60}
           alt="Clip"
-          src={video.thumbnail}
+          src={video?.thumbnail}
           className="rounded-xl w-full"
         />
         <h2 className="text-black dark:text-white uppercase text-lg mt-2">
-          {video.title}
+          {video?.title}
         </h2>
         <p className="text-black/60 dark:text-white/60 text-[15px]">
           3 days ago
