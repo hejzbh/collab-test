@@ -15,7 +15,7 @@ const ClipPlayer = ({}: ClipPlayerProps) => {
     playing,
     setPlaying,
   } = useMatchingVideoPlayers();
-  console.log(playing.clip);
+
   return (
     <div className="relative z-[1] h-[350px]">
       {/** Matching moment */}
