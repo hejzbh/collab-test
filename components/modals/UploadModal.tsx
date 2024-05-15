@@ -1,3 +1,4 @@
+import { useModal } from "@/store/modal-store";
 import dynamic from "next/dynamic";
 // Components
 const UploadClipForm = dynamic(
@@ -8,6 +9,8 @@ const UploadClipForm = dynamic(
 interface UploadModalProps {}
 
 const UploadModal = ({}: UploadModalProps) => {
+  const { closeModal } = useModal();
+
   return (
     <div className="w-full">
       {/** Title */}
@@ -15,7 +18,7 @@ const UploadModal = ({}: UploadModalProps) => {
         Lets <span className="text-textColors-blue">Upload</span> Video
       </h2>
       {/** Form */}
-      <UploadClipForm />
+      <UploadClipForm onSuccess={closeModal} />
     </div>
   );
 };

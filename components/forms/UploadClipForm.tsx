@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { useNotifications } from "@/store/notifications-store";
+import axios from "axios";
 // Components
 const Button = dynamic(() => import("@/components/ui/Button"));
 const Dropzone = dynamic(() => import("@/components/ui/Dropzone"));
@@ -9,6 +10,7 @@ const Loader = dynamic(() => import("@/components/ui/Loader"));
 // Props
 interface UploadClipFormProps {
   className?: string;
+  onSuccess?: () => void;
 }
 
 export interface UploadClipFormData {
@@ -17,7 +19,7 @@ export interface UploadClipFormData {
   description?: string;
 }
 
-const UploadClipForm = ({}: UploadClipFormProps) => {
+const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
   const [formData, setFormData] = useState<UploadClipFormData>({
     title: "",
     description: "",
@@ -40,13 +42,22 @@ const UploadClipForm = ({}: UploadClipFormProps) => {
     setLoading(true);
 
     try {
-      // Import upload clip function
-      const uploadClip = await import("@/lib/(upload)/upload-clip").then(
-        (res) => res.uploadClip
+      // Import upload file function
+      const uploadFile = await import("@/lib/(upload)/upload-file").then(
+        ({ uploadFile }) => uploadFile
       );
 
-      // Call function
-      await uploadClip(formData);
+      // Upload file
+      const uploadedFileId = await uploadFile(formData.file as File);
+
+      // Upload clip
+      await axios.post(`/api/upload-clip`, {
+        data: {
+          title: formData.title,
+          description: formData.description,
+          awsClipId: uploadedFileId,
+        },
+      });
 
       // If we've successfully  uploaded clip, show success notification to user and clear form data
       showNotification({
@@ -60,6 +71,8 @@ const UploadClipForm = ({}: UploadClipFormProps) => {
         description: "",
         file: undefined,
       });
+
+      onSuccess();
     } catch (err: any) {
       // Handle errors
       showNotification({
@@ -112,7 +125,7 @@ const UploadClipForm = ({}: UploadClipFormProps) => {
             name="title"
             onChange={onInputChange}
             value={formData?.title}
-            className="w-full outline-none rounded-xl p-3 bg-bgColors-input text-sm text-textColors-primary border-[1px] border-[#D8D7D5] dark:border-none "
+            className="w-full outline-none rounded-xl p-3 bg-bgColors-input text-sm md:text-[16px] text-textColors-primary border-[1px] border-[#D8D7D5] dark:border-none "
           />
         </div>
 
@@ -128,7 +141,7 @@ const UploadClipForm = ({}: UploadClipFormProps) => {
             name="description"
             onChange={onInputChange}
             value={formData?.description}
-            className="w-full outline-none rounded-xl p-3 bg-bgColors-input text-sm text-textColors-primary border-[1px] border-[#D8D7D5] dark:border-none "
+            className="w-full outline-none rounded-xl p-3 bg-bgColors-input text-sm md:text-[16px] text-textColors-primary border-[1px] border-[#D8D7D5] dark:border-none "
           />
         </div>
 

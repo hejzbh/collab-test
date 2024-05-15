@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { HomePageProps } from "@/app/(main)/page";
 // Icons
 import { ArrowLeftRightIcon } from "lucide-react";
+
 // Components
 const MatchingVideoPlayersProvider = dynamic(
   () => import("@/components/providers/MatchingVideoPlayersProvider")
@@ -43,6 +44,7 @@ const Matching = async ({ searchParams }: MatchingProps) => {
     new Promise((res) => res(true)),
   ]);
  */
+
   return (
     <MatchingVideoPlayersProvider>
       <div className="p-3 md:p-10 h-full !pb-[10rem] scrollbar-hide overflow-y-scroll">

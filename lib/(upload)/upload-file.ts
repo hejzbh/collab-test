@@ -18,9 +18,9 @@ export const uploadFile = async (file: File) => {
 
     // 3) Get uploaded file id
     const fileData = await axios.post(process.env.NEXT_PUBLIC_AWS_VIDEO_URL!, {
-      id,
+      id, // cd11e103-9eb8-4495-bd72-8e7f59071e1a
     });
-
+    console.log(fileData);
     const fileId = fileData.data;
 
     return fileId;
