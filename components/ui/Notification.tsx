@@ -25,11 +25,7 @@ export const NotificationTitle = ({
 }: {
   children: React.ReactNode;
 }) => {
-  return (
-    <h2 className="text-lg font-semibold text-white">
-      <h2>{children}</h2>
-    </h2>
-  );
+  return <h2 className="text-lg font-semibold text-white">{children}</h2>;
 };
 
 export const NotificationDescription = ({
