@@ -4,7 +4,7 @@ export const uploadFile = async (file: File) => {
   try {
     // 1) Make call to get presigned url
     const presignedDataResponse = await axios.get(
-      "https://ro5dfslqq6.execute-api.us-east-1.amazonaws.com/video" // todo: move to env
+      process.env.NEXT_PUBLIC_AWS_VIDEO_URL!
     );
 
     const presignedData = presignedDataResponse?.data;
@@ -17,12 +17,9 @@ export const uploadFile = async (file: File) => {
     await axios.put(url, file);
 
     // 3) Get uploaded file id
-    const fileData = await axios.post(
-      "https://ro5dfslqq6.execute-api.us-east-1.amazonaws.com/video",
-      {
-        id,
-      }
-    );
+    const fileData = await axios.post(process.env.NEXT_PUBLIC_AWS_VIDEO_URL!, {
+      id,
+    });
 
     const fileId = fileData.data;
 
