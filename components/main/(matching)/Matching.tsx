@@ -45,7 +45,7 @@ const Matching = async ({ searchParams }: MatchingProps) => {
  */
   return (
     <MatchingVideoPlayersProvider>
-      <div className="p-3 md:p-10 h-full pb-[10rem] scrollbar-hide overflow-y-scroll">
+      <div className="p-3 md:p-10 h-full !pb-[10rem] scrollbar-hide overflow-y-scroll">
         <div className="flex items-center sm:items-start gap-[3em] sm:gap-5 flex-col sm:flex-row ">
           {/** Clip Details */}
           <ClipDetails className="flex-1" />
