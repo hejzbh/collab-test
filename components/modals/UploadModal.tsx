@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 // Components
-const UploadVideoForm = dynamic(
+const UploadClipForm = dynamic(
   () => import("@/components/forms/UploadClipForm")
 );
 
@@ -15,7 +15,7 @@ const UploadModal = ({}: UploadModalProps) => {
         Lets <span className="text-textColors-blue">Upload</span> Video
       </h2>
       {/** Form */}
-      <UploadVideoForm />
+      <UploadClipForm />
     </div>
   );
 };

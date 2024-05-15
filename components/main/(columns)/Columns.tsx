@@ -31,7 +31,7 @@ const Columns = ({
         <Clips clips={clips} searchParams={searchParams} />
       </ResizablePanel>
 
-      {/** - */}
+      {/** Resize */}
       <ResizableHandle withHandle />
 
       {/** Videos */}
@@ -39,7 +39,7 @@ const Columns = ({
         <Videos videos={matchingVideos} searchParams={searchParams} />
       </ResizablePanel>
 
-      {/** - */}
+      {/** Resize */}
       <ResizableHandle withHandle />
 
       {/** Matching */}

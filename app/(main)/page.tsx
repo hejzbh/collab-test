@@ -46,7 +46,7 @@ export const getData = async function (
 export default async function HomePage({ searchParams }: HomePageProps) {
   const { clips, matchingVideos } = await getData(searchParams);
 
-  const userHasNoClips = false; // !clips || !clips?.length
+  const userHasNoClips = !clips || !clips?.length;
 
   return (
     <main className="h-full w-full overflow-hidden">

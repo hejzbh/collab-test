@@ -1,12 +1,17 @@
-import { UploadVideoFormData } from "@/components/forms/UploadClipForm";
+import { UploadClipFormData } from "@/components/forms/UploadClipForm";
 import { uploadFile } from "./upload-file";
 
-export const uploadClip = async (data: UploadVideoFormData) => {
+export const uploadClip = async (data: UploadClipFormData) => {
   try {
-    if (!data?.file) return;
+    // 1)
+    if (!data?.file) throw new Error("Data is missing");
 
-    await uploadFile(data?.file);
-  } catch {
-    throw new Error("Error while uploading clip");
+    // 2)
+    const uploadedFileId = await uploadFile(data?.file);
+
+    // 3)
+    return uploadedFileId;
+  } catch (err: any) {
+    throw new Error(err.message);
   }
 };

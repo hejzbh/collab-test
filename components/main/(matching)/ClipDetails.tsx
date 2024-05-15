@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
-import ReactPlayer from "react-player";
+import dynamic from "next/dynamic";
+// Components
+const ClipPlayer = dynamic(() => import("./ClipPlayer"));
 
 // Props
 interface ClipDetailsProps {
@@ -11,16 +13,7 @@ const ClipDetails = ({ className = "" }: ClipDetailsProps) => {
   return (
     <div className={`${className}`}>
       {/** Player */}
-      <div className="relative z-[1] h-[350px]">
-        <ReactPlayer
-          width={"100%"}
-          height={"100%"}
-          controls
-          url={
-            "https://www.youtube.com/watch?v=Ji_ymeikdUY&ab_channel=TheFunnyFails"
-          }
-        />
-      </div>
+      <ClipPlayer />
       {/** Title And Description (Details) */}
 
       <div>

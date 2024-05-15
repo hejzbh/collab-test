@@ -10,7 +10,7 @@ interface LoaderProps {
 const Loader = ({ className = "", size = 70 }: LoaderProps) => {
   return (
     <LoaderIcon
-      className={`animate-spin duration-1000 text-red ${className}`}
+      className={`animate-spin duration-1000 text-textColors-blue ${className}`}
       size={size}
     />
   );

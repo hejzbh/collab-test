@@ -30,8 +30,17 @@ const Videos = ({ videos = [], searchParams }: VideosProps) => {
   }
 
   // 2) User has selected clip, but clip have no matching videos
-  if (!searchParams.selectedClipId) {
-    return <h1>There is no matching videos</h1>;
+  if (searchParams.selectedClipId && !videos?.length) {
+    const NoResultsBanner = dynamic(
+      () => import("@/components/banners/NoResultsBanner"),
+      { loading: () => null }
+    );
+    return (
+      <NoResultsBanner
+        title="No Matching Videos"
+        description="There are no videos that match your clip"
+      />
+    );
   }
 
   return (

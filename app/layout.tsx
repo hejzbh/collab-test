@@ -6,6 +6,7 @@ import { Open_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import ModalProvider from "@/components/providers/ModalProvider";
+import NotificationsProvider from "@/components/providers/NotificationsProvider";
 
 const font = Open_Sans({
   subsets: ["latin"],
@@ -27,8 +28,9 @@ export default function RootLayout({
       <html lang="en">
         <ThemeProvider>
           <body className={`${font.className} bg-bgColors-primary h-screen`}>
-            <ModalProvider />
             {children}
+            <ModalProvider />
+            <NotificationsProvider />
           </body>
         </ThemeProvider>
       </html>

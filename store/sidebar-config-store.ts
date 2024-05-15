@@ -14,7 +14,7 @@ export const useSidebarConfig = create<SidebarConfigStore>((set) => ({
   toggleSidebarExpandStatus: (status?: boolean) => {
     set((previousState) => ({
       ...previousState,
-      isSidebarExpanded: status || !previousState.isSidebarExpanded,
+      isSidebarExpanded: status ?? !previousState.isSidebarExpanded, // Set provided opened status, or if it doesnt exists just toggle previous status value.
     }));
   },
 }));

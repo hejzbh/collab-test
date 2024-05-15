@@ -5,6 +5,8 @@ import React, { useRef, useState } from "react";
 import { FileUpIcon } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useNotifications } from "@/store/notifications-store";
+// Components
+const FilePreview = dynamic(() => import("@/components/ui/FilePreview"));
 
 // Props
 interface DropzoneProps {
@@ -52,6 +54,8 @@ const Dropzone = ({
     // 1) Get file
     const file = files[0];
 
+    if (!file) return;
+
     // 2) Get file extenstion
     const fileExtenstion = file.name.split(".").pop() + "";
 
@@ -74,10 +78,6 @@ const Dropzone = ({
   }
 
   if (file) {
-    const FilePreview = dynamic(() => import("@/components/ui/FilePreview"), {
-      loading: () => <></>,
-    });
-
     return (
       <FilePreview
         file={file}

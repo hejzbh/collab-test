@@ -15,16 +15,22 @@ let clearPopupTimeout: any = null;
 export const useNotifications = create<NotificationsStore>((set, _, store) => ({
   notification: null,
   showNotification: (notification) => {
+    // Clear previous notification, if it exists.
     if (store.getState().notification) {
       set({ notification: null });
     }
 
+    // Set new one
     set({ notification });
 
+    // Clear notification after
     if (clearPopupTimeout) clearTimeout(clearPopupTimeout);
 
-    clearPopupTimeout = setTimeout(() => {
-      set({ notification: null });
-    }, 3000);
+    clearPopupTimeout = setTimeout(
+      () => {
+        set({ notification: null });
+      },
+      notification?.variant === "error" ? 6000 : 3000
+    );
   },
 }));

@@ -17,9 +17,13 @@ const ClickExpandable = ({
 
   return (
     <div className={`relative ${className}`}>
-      <button onClick={() => setExpanded((expanded) => !expanded)} title="Click">
+      <div
+        onClick={() => setExpanded((expanded) => !expanded)}
+        title="Click"
+        className="cursor-pointer"
+      >
         {TrigerElement}
-      </button>
+      </div>
       <div
         className={clsx(
           "absolute top-[10%%] right-0 w-ful min-w-[180px] sm:min-w-[200px] transition-all duration-200 ease-in-out",

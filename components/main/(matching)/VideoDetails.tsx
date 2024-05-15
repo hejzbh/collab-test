@@ -1,58 +1,21 @@
 "use client";
-
-import React, { useRef, useState } from "react";
-import ReactPlayer from "react-player";
+import React from "react";
+import dynamic from "next/dynamic";
+import { useMatchingVideoPlayers } from "@/components/providers/MatchingVideoPlayersProvider";
+const VideoPlayer = dynamic(() => import("./VideoPlayer"));
 
 // Props
 interface VideoDetailsProps {
   className?: string;
 }
 
-// TODO: Remove later
-const clipStartTime = 5;
-const clipEndTime = 13;
-
 const VideoDetails = ({ className = "" }: VideoDetailsProps) => {
-  const playerRef: any = useRef();
-
-  const [matchingMoment, setMatchingMoment] = useState<boolean>(false);
-  const [playing, setPlaying] = useState<boolean>(false);
-
-  const handleProgress = ({ playedSeconds }: any) => {
-    setMatchingMoment(
-      playedSeconds >= clipStartTime && playedSeconds <= clipEndTime
-    );
-  };
-
-  function playMatchingMoment() {
-    playerRef.current.seekTo(clipStartTime, "seconds");
-    setPlaying(true);
-  }
+  const { playMatchingMoment } = useMatchingVideoPlayers();
 
   return (
     <div className={`${className}`}>
       {/** Player */}
-      <div className="relative z-[1] h-[350px]">
-        {/** Matching moment */}
-        {matchingMoment && (
-          <span className="bg-bgColors-blue shadow-xl z-10 absolute bottom-14 left-10 min-w-[80px] p-1 px-2 rounded-lg  text-center text-white">
-            MATCHING
-          </span>
-        )}
-        <ReactPlayer
-          controls
-          ref={playerRef}
-          width={"100%"}
-          playing={playing}
-          onPlay={() => setPlaying(true)}
-          height={"100%"}
-          style={{ zIndex: "-1" }}
-          url={
-            "https://www.youtube.com/watch?v=XnitQYkYYcw&ab_channel=FailArmy"
-          }
-          onProgress={handleProgress}
-        />
-      </div>
+      <VideoPlayer />
 
       {/** Title And Description (Details) */}
       <div className="text-left">

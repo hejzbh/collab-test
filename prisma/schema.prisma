@@ -25,11 +25,11 @@ model User {
 model Clip {
     id String @id @default(uuid()) @map("_id")
     title String @db.String
-    videoUrl String @db.String
+    awsClipId String @db.String
     userId String
     user User @relation(fields: [userId],references: [id],onDelete:Cascade)
     matching Matching[]
-    thumbnail String
+    thumbnail String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     @@index([userId])

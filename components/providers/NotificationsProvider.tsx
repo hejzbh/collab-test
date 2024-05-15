@@ -17,8 +17,10 @@ const NotificationsProvider = () => {
   return (
     <div
       className={clsx(
-        "!fixed top-2 right-2 !z-[10000] transition-all duration-300 ease-in-out opacity-0 translate-y-[-50%]",
-        notification && "!opacity-100 !translate-y-0"
+        "!fixed top-2 right-2 !z-[10000] transition-all duration-300 ease-in-out ",
+        notification
+          ? "!opacity-100 !translate-y-0"
+          : "opacity-0 translate-y-[-50%]"
       )}
     >
       <Notification variant={notification?.variant as any}>

@@ -52,7 +52,7 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
           width={350}
           height={500}
           alt="Clip"
-          src={clip.thumbnail}
+          src={clip?.thumbnail as string}
           className="rounded-xl w-full"
         />
         <h2 className="text-black dark:text-white uppercase text-lg mt-2">

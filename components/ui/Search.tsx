@@ -31,6 +31,7 @@ const Search = ({ className, searchParams }: SearchProps) => {
   }, [value]);
 
   useEffect(() => {
+    // Prevent pushing query in url on first render
     if (!mounted) {
       setMounted(true);
       return;
