@@ -51,8 +51,8 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
           loading="lazy"
           width={350}
           height={500}
-          alt="Clip"
           quality={60}
+          alt="Clip"
           src={clip?.thumbnail as string}
           className="rounded-xl w-full"
         />
