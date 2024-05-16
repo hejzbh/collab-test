@@ -24,7 +24,7 @@ interface MatchingProps {
 
 const Matching = async ({ searchParams }: MatchingProps) => {
   // 1) User didnt select video
-  if (!searchParams.selectedVideoId) {
+  if (!searchParams.selectedVideoId || !searchParams.selectedClipId) {
     const NotSelectedBanner = dynamic(
       () => import("@/components/banners/NotSelectedBanner"),
       { loading: () => null }
