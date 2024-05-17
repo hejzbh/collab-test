@@ -44,7 +44,9 @@ const ClipPlayer = ({}: ClipPlayerProps) => {
         }
         height={"100%"}
         style={{ zIndex: "-1" }}
-        url={"https://www.youtube.com/watch?v=XnitQYkYYcw&ab_channel=FailArmy"}
+        url={
+          "https://videos.pexels.com/video-files/7125759/7125759-uhd_3840_2160_30fps.mp4"
+        }
         onProgress={handleClipProgress}
       />
     </div>
