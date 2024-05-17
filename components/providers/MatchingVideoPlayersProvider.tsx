@@ -30,8 +30,8 @@ export type MatchingVideoPlayersValue = {
 // TODO: Remove later
 const startVideoTime = 5;
 const endVideoTime = 14;
-const startClipTime = 150;
-const endClipTime = 159;
+const startClipTime = 6;
+const endClipTime = 15;
 
 const MatchingVideoPlayersContext = createContext({});
 
