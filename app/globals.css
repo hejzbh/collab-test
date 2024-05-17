@@ -113,3 +113,7 @@ input {
   top: 30px;
   transform: rotate(-45deg);
 }
+
+video {
+  object-fit: cover !important;
+}

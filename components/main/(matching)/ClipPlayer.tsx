@@ -43,9 +43,9 @@ const ClipPlayer = ({}: ClipPlayerProps) => {
           }))
         }
         height={"100%"}
-        style={{ zIndex: "-1" }}
+        style={{ zIndex: "-1", objectFit: "cover" }}
         url={
-          "https://videos.pexels.com/video-files/7125759/7125759-uhd_3840_2160_30fps.mp4"
+          "https://videos.pexels.com/video-files/6646525/6646525-uhd_3840_2160_25fps.mp4"
         }
         onProgress={handleClipProgress}
       />
