@@ -29,7 +29,6 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
         searchParams,
         newSearchParams: {
           selectedClipId: clip.id,
-          selectedVideoId: "",
         },
       })}`
     );

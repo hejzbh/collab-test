@@ -9,6 +9,8 @@ interface VideoDetailsProps {
   className?: string;
 }
 
+import { matchingMoments } from "@/components/providers/MatchingVideoPlayersProvider";
+
 const VideoDetails = ({ className = "" }: VideoDetailsProps) => {
   const { playMatchingMoment } = useMatchingVideoPlayers();
 
@@ -26,13 +28,18 @@ const VideoDetails = ({ className = "" }: VideoDetailsProps) => {
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam tenetur
           minima consectetur? Obcaecati.
         </p>
-        <button
-          title="Time when your clip start"
-          onClick={playMatchingMoment}
-          className="text-textColors-blue underline mt-5 text-md uppercase font-[500] text-left w-fit"
-        >
-          Play matching moment
-        </button>
+        <div className="flex flex-col">
+          {matchingMoments?.map((moment, idx) => (
+            <button
+              key={idx}
+              title="Time when your clip start"
+              onClick={() => playMatchingMoment(moment)}
+              className="text-textColors-blue underline mt-5 text-md uppercase font-[500] text-left w-fit"
+            >
+              Play matching moment {idx + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

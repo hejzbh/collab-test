@@ -48,14 +48,14 @@ const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
       );
 
       // Upload file
-      const uploadedFileId = await uploadFile(formData.file as File);
+      const uploadedFileKey = await uploadFile(formData.file as File);
 
       // Upload clip
       await axios.post(`/api/upload-clip`, {
         data: {
           title: formData.title,
           description: formData.description,
-          awsClipId: uploadedFileId,
+          awsClipKey: uploadedFileKey,
         },
       });
 

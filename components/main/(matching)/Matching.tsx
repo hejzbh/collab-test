@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { HomePageProps } from "@/app/(main)/page";
 // Icons
 import { ArrowLeftRightIcon } from "lucide-react";
+import axios from "axios";
 
 // Components
 const MatchingVideoPlayersProvider = dynamic(
@@ -24,7 +25,7 @@ interface MatchingProps {
 
 const Matching = async ({ searchParams }: MatchingProps) => {
   // 1) User didnt select video
-  if (!searchParams.selectedVideoId || !searchParams.selectedClipId) {
+  if (!searchParams.selectedVideoId) {
     const NotSelectedBanner = dynamic(
       () => import("@/components/banners/NotSelectedBanner"),
       { loading: () => null }

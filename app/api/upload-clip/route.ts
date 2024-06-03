@@ -6,11 +6,11 @@ export async function POST(req: Request) {
   try {
     // 1) Extracting data from request body
     const {
-      data: { title, description, awsClipId },
+      data: { title, description, awsClipKey },
     } = await req.json();
 
     // 2) Checking if data is missing
-    if (!title || !awsClipId)
+    if (!title || !awsClipKey)
       return new NextResponse("Data is missing", {
         status: 400,
       });
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       data: {
         title,
         description,
-        awsClipId,
+        awsClipKey,
         userId: user?.id,
       },
     });
