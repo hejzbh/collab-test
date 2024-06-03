@@ -23,7 +23,7 @@ export type MatchingVideoPlayersValue = {
     video: boolean;
   };
   setPlaying: React.SetStateAction<any>;
-  playMatchingMoment: (moment: MatchingMoment) => void;
+  playMatchingMoment: (moment: MatchingMoment) => void; // eslint-disable-line
   handleClipProgress: (params: { playedSeconds: number }) => void; // eslint-disable-line
   handleVideoProgress: (params: { playedSeconds: number }) => void; // eslint-disable-line
 };
@@ -89,7 +89,7 @@ const MatchingVideoPlayersProvider = ({
   };
 
   const handleClipProgress = ({ playedSeconds }: any) => {
-    setIsMatchingMomentInVideo(
+    setIsMatchingMomentInClip(
       matchingMoments?.some(
         (matchingMoment) =>
           playedSeconds >= matchingMoment.startClipTime &&

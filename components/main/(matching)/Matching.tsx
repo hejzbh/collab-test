@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 import { HomePageProps } from "@/app/(main)/page";
 // Icons
 import { ArrowLeftRightIcon } from "lucide-react";
-import axios from "axios";
 
 // Components
 const MatchingVideoPlayersProvider = dynamic(
