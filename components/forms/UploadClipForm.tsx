@@ -2,6 +2,8 @@ import React, { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { useNotifications } from "@/store/notifications-store";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
 // Components
 const Button = dynamic(() => import("@/components/ui/Button"));
 const Dropzone = dynamic(() => import("@/components/ui/Dropzone"));
@@ -32,6 +34,8 @@ const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
     [formData, loading]
   );
 
+  const router = useRouter();
+
   const { showNotification } = useNotifications();
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -55,7 +59,7 @@ const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
         data: {
           title: formData.title,
           description: formData.description,
-          awsClipKey: uploadedFileKey,
+          awsClipId: uploadedFileKey,
         },
       });
 
@@ -71,6 +75,8 @@ const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
         description: "",
         file: undefined,
       });
+
+      router.refresh();
 
       onSuccess();
     } catch (err: any) {

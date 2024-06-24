@@ -8,8 +8,8 @@ const Logo = dynamic(() => import("@/components/ui/Logo"));
 
 const AuthLayout = (props: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const pageType: "sign-in" | "sign-up" = useMemo(
-    () => (pathname?.startsWith("/sign-in") ? "sign-in" : "sign-up"),
+  const pageType = useMemo(
+    () => pathname.slice(1) as "sign-in" | "sign-up", // remove / at first index
     [pathname]
   );
   return (

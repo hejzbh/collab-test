@@ -6,11 +6,11 @@ export async function POST(req: Request) {
   try {
     // 1) Extracting data from request body
     const {
-      data: { title, description, awsClipKey },
+      data: { title, description, awsClipId },
     } = await req.json();
 
     // 2) Checking if data is missing
-    if (!title || !awsClipKey)
+    if (!title || !awsClipId)
       return new NextResponse("Data is missing", {
         status: 400,
       });
@@ -22,11 +22,12 @@ export async function POST(req: Request) {
     if (!user) throw new Error("Unauthorized");
 
     // 5) Creating a new clip in the database
+    //_0.jpg TODO
     const clip = await db.clip.create({
       data: {
+        id: awsClipId,
         title,
         description,
-        awsClipKey,
         userId: user?.id,
       },
     });

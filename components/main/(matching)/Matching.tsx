@@ -24,7 +24,7 @@ interface MatchingProps {
 
 const Matching = async ({ searchParams }: MatchingProps) => {
   // 1) User didnt select video
-  if (!searchParams.selectedVideoId) {
+  if (!searchParams.selectedVideoId || !searchParams.selectedClipId) {
     const NotSelectedBanner = dynamic(
       () => import("@/components/banners/NotSelectedBanner"),
       { loading: () => null }
@@ -38,7 +38,7 @@ const Matching = async ({ searchParams }: MatchingProps) => {
     );
   }
 
-  // 2) User selected clip and video, go fetch details of that
+  // 2) if User has selected clip and video
   /** const [videoDetails, clipDetails] = await Promise.all([
     new Promise((res) => res({})),
     new Promise((res) => res(true)),

@@ -1,7 +1,8 @@
 "use client";
 
-import { useMatchingVideoPlayers } from "@/components/providers/MatchingVideoPlayersProvider";
 import React from "react";
+import MatchingBadge from "@/components/ui/MatchingBadge";
+import { useMatchingVideoPlayers } from "@/components/providers/MatchingVideoPlayersProvider";
 import ReactPlayer from "react-player";
 
 // Props
@@ -20,9 +21,7 @@ const ClipPlayer = ({}: ClipPlayerProps) => {
     <div className="relative z-[1] h-[350px]">
       {/** Matching moment */}
       {isMatchingMomentInClip && (
-        <span className="bg-bgColors-blue shadow-xl z-10 absolute bottom-14 left-10 min-w-[80px] p-1 px-2 rounded-lg  text-center text-white">
-          MATCHING
-        </span>
+        <MatchingBadge className="absolute bottom-14 left-10" />
       )}
       {/** Player */}
       <ReactPlayer
@@ -32,13 +31,13 @@ const ClipPlayer = ({}: ClipPlayerProps) => {
         playing={playing.clip}
         onPause={() =>
           setPlaying((playingData: { video: boolean; clip: boolean }) => ({
-            video: playingData.video,
+            ...playingData,
             clip: false,
           }))
         }
         onPlay={() =>
           setPlaying((playingData: { video: boolean; clip: boolean }) => ({
-            video: playingData.video,
+            ...playingData,
             clip: true,
           }))
         }

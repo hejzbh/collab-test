@@ -29,7 +29,6 @@ model Clip {
     id String @id @default(uuid()) @map("_id")
     title String @db.String
     description String? @db.String
-    awsClipKey String @db.String
     userId String
     user User @relation(fields: [userId],references: [id],onDelete:Cascade)
     matching Matching[]

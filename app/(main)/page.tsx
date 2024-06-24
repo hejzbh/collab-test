@@ -1,7 +1,7 @@
 //import { currentUser } from "@clerk/nextjs/server";
-import { dummyClips } from "@/constants/clips";
 import { dummyVideos } from "@/constants/videos";
 import { Clip, Video } from "@prisma/client";
+import { getUserClips } from "@/lib/(user)/get-user-clips";
 // Next
 import dynamic from "next/dynamic";
 // Components
@@ -23,11 +23,8 @@ export type HomePageProps = {
 export const getData = async function (
   searchParams: HomePageProps["searchParams"]
 ) {
-  // 1) Get user
-  // const user = await currentUser();
-
   // 2) Get user's clips
-  const clips: Clip[] = dummyClips;
+  const clips: Clip[] = await getUserClips();
 
   // 3) If the user has selected one of the clips, retrieve matching videos.
   let matchingVideos: Video[] = [];
