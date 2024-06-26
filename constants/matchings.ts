@@ -22,7 +22,7 @@ export const matchingsDummy: MatchingType[] = [
         startClipTime: 0,
         endClipTime: 4,
         startVideoTime: 18.7,
-        endVideoTime: 23,
+        endVideoTime: 22.7,
         matchingId: "swagasgsagas",
       },
     ],
