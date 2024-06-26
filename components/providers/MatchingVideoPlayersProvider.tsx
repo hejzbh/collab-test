@@ -11,6 +11,7 @@ import React, {
 // Props
 interface MatchingVideoPlayersProviderProps {
   children: React.ReactNode;
+  matchingMoments: MatchingMoment[];
 }
 
 export type MatchingVideoPlayersValue = {
@@ -28,42 +29,11 @@ export type MatchingVideoPlayersValue = {
   handleVideoProgress: (params: { playedSeconds: number }) => void; // eslint-disable-line
 };
 
-// TODO: Remove later
-export const matchingMoments: MatchingMoment[] = [
-  {
-    startVideoTime: 1,
-    endVideoTime: 3,
-    startClipTime: 1,
-    endClipTime: 3,
-    id: "214512",
-  } as MatchingMoment,
-  {
-    startVideoTime: 6,
-    endVideoTime: 8,
-    startClipTime: 6,
-    endClipTime: 8,
-    id: "125125",
-  } as MatchingMoment,
-  {
-    startVideoTime: 10,
-    endVideoTime: 12,
-    startClipTime: 10,
-    endClipTime: 12,
-    id: "52151",
-  } as MatchingMoment,
-  {
-    startVideoTime: 14,
-    endVideoTime: 17,
-    startClipTime: 14,
-    endClipTime: 17,
-    id: "2152152151",
-  } as MatchingMoment,
-];
-
 const MatchingVideoPlayersContext = createContext({});
 
 const MatchingVideoPlayersProvider = ({
   children,
+  matchingMoments,
 }: MatchingVideoPlayersProviderProps) => {
   const clipPlayerRef: any = useRef();
   const videoPlayerRef: any = useRef();
@@ -122,7 +92,7 @@ const MatchingVideoPlayersProvider = ({
       videoPlayerRef,
       playing,
       isMatchingMomentInClip,
-    ]
+    ] // eslint-disable-line
   );
 
   return (

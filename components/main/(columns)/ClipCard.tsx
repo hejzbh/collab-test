@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { HomePageProps } from "@/app/(main)/page";
 import { generateNewQuery } from "@/utils/generate-new-query";
 import { clsx } from "@/utils/clsx";
+import { timeAgo } from "@/utils/timeAgo";
 
 // Props
 interface ClipCardProps {
@@ -29,6 +30,7 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
         searchParams,
         newSearchParams: {
           selectedClipId: clip.id,
+          selectedVideoId: null,
         },
       })}`
     );
@@ -54,14 +56,14 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
           quality={60}
           alt="Clip"
           src={clip?.thumbnail || "/images/not-loaded-image.avif"}
-          className="rounded-xl w-full"
+          className="rounded-xl w-full h-[200px] object-cover"
         />
 
         <h2 className="text-black dark:text-white uppercase text-lg mt-2">
           {clip?.title}
         </h2>
         <p className="text-black/60 dark:text-white/60 text-[15px]">
-          3 days ago
+          {timeAgo(clip.createdAt)}
         </p>
       </div>
     </div>

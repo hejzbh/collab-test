@@ -2,32 +2,43 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { useMatchingVideoPlayers } from "@/components/providers/MatchingVideoPlayersProvider";
+import { MatchingMoment, Video } from "@prisma/client";
+import Link from "next/link";
+import { Youtube } from "lucide-react";
 const VideoPlayer = dynamic(() => import("./VideoPlayer"));
 
 // Props
 interface VideoDetailsProps {
   className?: string;
+  matchingMoments: MatchingMoment[];
+  video: Video;
 }
 
-import { matchingMoments } from "@/components/providers/MatchingVideoPlayersProvider";
-
-const VideoDetails = ({ className = "" }: VideoDetailsProps) => {
+const VideoDetails = ({
+  className = "",
+  matchingMoments,
+  video,
+}: VideoDetailsProps) => {
   const { playMatchingMoment } = useMatchingVideoPlayers();
 
   return (
     <div className={`${className}`}>
       {/** Player */}
-      <VideoPlayer />
+      <VideoPlayer url={video.awsUrl as string} />
 
       {/** Title And Description (Details) */}
       <div className="text-left">
         <h2 className="text-black dark:text-white uppercase text-lg mt-2">
-          Video Name
+          {video.title}
         </h2>
-        <p className="text-black/60 dark:text-white/60 text-[15px]">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam tenetur
-          minima consectetur? Obcaecati.
-        </p>
+        <Link
+          title={`Go to Youtube`}
+          href={`https://www.youtube.com/watch?v=${video.youtubeId}`}
+          className="text-black/60 dark:text-white/60 text-[15px] hover:text-[red] uppercase mt-2 underline flex items-center "
+        >
+          <Youtube className=" mr-2 text-[red]" />
+          Youtube Link
+        </Link>
         <div className="flex flex-col">
           {matchingMoments?.map((moment, idx) => (
             <button

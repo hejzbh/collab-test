@@ -32,6 +32,7 @@ model Clip {
     userId String
     user User @relation(fields: [userId],references: [id],onDelete:Cascade)
     matching Matching[]
+    awsUrl String? @db.String
     thumbnail String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -44,6 +45,7 @@ model Video {
     matching Matching[]
     title String @db.String
     thumbnail String
+    awsUrl String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }

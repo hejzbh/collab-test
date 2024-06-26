@@ -6,9 +6,11 @@ import MatchingBadge from "@/components/ui/MatchingBadge";
 import ReactPlayer from "react-player";
 
 // Props
-interface VideoPlayerProps {}
+interface VideoPlayerProps {
+  url: string;
+}
 
-const VideoPlayer = ({}: VideoPlayerProps) => {
+const VideoPlayer = ({ url }: VideoPlayerProps) => {
   const {
     videoPlayerRef,
     isMatchingMomentInVideo,
@@ -45,7 +47,7 @@ const VideoPlayer = ({}: VideoPlayerProps) => {
         }
         height={"100%"}
         style={{ zIndex: "-1" }}
-        url={"https://www.youtube.com/watch?v=XnitQYkYYcw&ab_channel=FailArmy"}
+        url={url}
         onProgress={handleVideoProgress}
       />
     </div>
