@@ -63,6 +63,9 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
           {clip?.title}
         </h2>
         <p className="text-black/60 dark:text-white/60 text-[15px]">
+          {clip.description}
+        </p>
+        <p className="text-black/60 dark:text-white/60 text-[15px]">
           {timeAgo(clip.createdAt)}
         </p>
       </div>
