@@ -38,7 +38,7 @@ export const dummyClips: ClipType[] = [
     title: "Unique clip",
     description: "Clip taken from my mobile phone",
     userId: "er_2fs3oWjiiczLARjZJhS6PO",
-    thumbnail: "/images/thumbnail-4.webp",
+    thumbnail: "/images/thumbnail-5.webp",
     awsUrl: "/clips/clip-4.mp4",
     createdAt: new Date(new Date().setMonth(new Date().getMonth() - 5)),
   },
