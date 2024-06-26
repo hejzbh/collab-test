@@ -34,7 +34,7 @@ export const dummyClips: ClipType[] = [
     createdAt: new Date(new Date().setMonth(new Date().getMonth() - 2)),
   },
   {
-    id: "ssss",
+    id: "sxxxxsaa5623",
     title: "Unique clip",
     description: "Clip taken from my mobile phone",
     userId: "er_2fs3oWjiiczLARjZJhS6PO",
