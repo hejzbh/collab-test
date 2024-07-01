@@ -22,6 +22,7 @@ const ClipPlayer = ({ url }: ClipPlayerProps) => {
         controls
         ref={clipPlayerRef}
         width={"100%"}
+        muted
         playing={playing.clip}
         onPause={() =>
           setPlaying((playingData: { video: boolean; clip: boolean }) => ({

@@ -44,6 +44,7 @@ const VideoCard = ({ video, searchParams }: VideoCardProps) => {
           <span className="shadow-xl">Selected</span>
         </div>
       )}
+
       <div className={isVideoClicked ? "opacity-80" : ""}>
         <Image
           loading="lazy"

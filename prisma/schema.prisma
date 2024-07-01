@@ -18,7 +18,7 @@ model User {
   email String @db.String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
+  bookmarks Bookmark[]
   clips Clip[]
 }
 
@@ -65,8 +65,21 @@ model Matching {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
+    bookmarks Bookmark[]
+
     @@index([clipId])
     @@index([videoId])
+}
+
+model Bookmark {
+    id String @id @default(uuid()) @map("_id")
+    matchingId String
+    matching Matching @relation(fields: [matchingId],references: [id],onDelete:Cascade)
+    userId String
+    user User @relation(fields: [userId],references: [id],onDelete:Cascade)
+    @@index([matchingId])
+    @@index([userId])
+
 }
 
 

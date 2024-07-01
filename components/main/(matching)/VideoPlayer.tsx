@@ -14,7 +14,6 @@ const VideoPlayer = ({ url }: VideoPlayerProps) => {
   const {
     videoPlayerRef,
     isMatchingMomentInVideo,
-
     handleVideoProgress,
     playing,
     setPlaying,
@@ -31,6 +30,7 @@ const VideoPlayer = ({ url }: VideoPlayerProps) => {
       <ReactPlayer
         controls
         ref={videoPlayerRef}
+        muted
         width={"100%"}
         playing={playing.video}
         onPause={() =>
