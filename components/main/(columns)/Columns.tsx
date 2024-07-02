@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/Resizable";
 import { Clip, Video } from "@prisma/client";
 import { HomePageProps } from "@/app/(main)/page";
+import { ColumnsOrderEnum } from "@/types";
+const ColumnsOrderToggler = dynamic(() => import("./ColumnsOrderToggler"));
 const Clips = dynamic(() => import("./Clips"));
 const Videos = dynamic(() => import("./Videos"));
 const Matching = dynamic(() => import("../(matching)/Matching"));
@@ -15,20 +17,21 @@ const Matching = dynamic(() => import("../(matching)/Matching"));
 // Props
 interface ColumnsProps {
   clips: Clip[];
-  matchingVideos: Video[];
+  videos: Video[];
   searchParams: HomePageProps["searchParams"];
 }
 
-const Columns = ({
-  clips = [],
-  matchingVideos,
-  searchParams,
-}: ColumnsProps) => {
+const Columns = ({ clips = [], videos, searchParams }: ColumnsProps) => {
   return (
     <ResizablePanelGroup direction="horizontal">
       {/** Clips */}
       <ResizablePanel defaultSize={22}>
-        <Clips clips={clips} searchParams={searchParams} />
+        <ColumnsOrderToggler searchParams={searchParams} />
+        {searchParams?.columnsOrder === ColumnsOrderEnum.VIDEO_CLIP ? (
+          <Videos videos={videos} searchParams={searchParams} />
+        ) : (
+          <Clips clips={clips} searchParams={searchParams} />
+        )}
       </ResizablePanel>
 
       {/** Resize */}
@@ -36,7 +39,11 @@ const Columns = ({
 
       {/** Videos */}
       <ResizablePanel defaultSize={22}>
-        <Videos videos={matchingVideos} searchParams={searchParams} />
+        {searchParams?.columnsOrder === ColumnsOrderEnum.VIDEO_CLIP ? (
+          <Clips clips={clips} searchParams={searchParams} />
+        ) : (
+          <Videos videos={videos} searchParams={searchParams} />
+        )}
       </ResizablePanel>
 
       {/** Resize */}

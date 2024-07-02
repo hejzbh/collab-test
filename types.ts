@@ -25,3 +25,10 @@ export type MatchingWithAllData = Matching & {
 export type BookmarkWithAllDataType = Bookmark & {
   matching: MatchingWithAllData;
 };
+
+export type ColumnsOrderType = "clip-video" | "video-clip";
+
+export enum ColumnsOrderEnum {
+  CLIP_VIDEO = "clip-video",
+  VIDEO_CLIP = "video-clip",
+}

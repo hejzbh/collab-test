@@ -2,6 +2,7 @@ import { Video } from "@prisma/client";
 import React from "react";
 import dynamic from "next/dynamic";
 import { HomePageProps } from "@/app/(main)/page";
+import { ColumnsOrderEnum } from "@/types";
 // Components
 const VideoCard = dynamic(
   () => import("@/components/main/(columns)/VideoCard")
@@ -15,7 +16,10 @@ interface VideosProps {
 
 const Videos = ({ videos = [], searchParams }: VideosProps) => {
   // 1) User didnt select clip
-  if (!searchParams.selectedClipId) {
+  if (
+    searchParams.columnsOrder === ColumnsOrderEnum.CLIP_VIDEO &&
+    !searchParams.selectedClipId
+  ) {
     const NotSelectedBanner = dynamic(
       () => import("@/components/banners/NotSelectedBanner"),
       { loading: () => null }

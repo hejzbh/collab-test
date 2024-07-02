@@ -9,13 +9,13 @@ const Columns = dynamic(() => import("@/components/main/(columns)/Columns"));
 // Props
 interface MainContentProps {
   clips: Clip[];
-  matchingVideos?: Video[];
+  videos?: Video[];
   searchParams: HomePageProps["searchParams"];
 }
 
 const MainContent = ({
   clips = [],
-  matchingVideos = [],
+  videos = [],
   searchParams,
 }: MainContentProps) => {
   return (
@@ -24,11 +24,7 @@ const MainContent = ({
         searchParams={searchParams}
         className="bg-black/[0.05] dark:bg-black/20 border-b-[1px] border-borderColors-primary px-2 py-4 md:px-5 md:py-8"
       />
-      <Columns
-        clips={clips}
-        matchingVideos={matchingVideos}
-        searchParams={searchParams}
-      />
+      <Columns clips={clips} videos={videos} searchParams={searchParams} />
     </div>
   );
 };

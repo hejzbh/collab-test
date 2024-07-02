@@ -8,6 +8,7 @@ import { HomePageProps } from "@/app/(main)/page";
 import { generateNewQuery } from "@/utils/generate-new-query";
 import { clsx } from "@/utils/clsx";
 import { timeAgo } from "@/utils/timeAgo";
+import { ColumnsOrderEnum } from "@/types";
 
 // Props
 interface ClipCardProps {
@@ -30,7 +31,9 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
         searchParams,
         newSearchParams: {
           selectedClipId: clip.id,
-          selectedVideoId: null,
+          ...(searchParams.columnsOrder === ColumnsOrderEnum.CLIP_VIDEO
+            ? { selectedVideoId: null }
+            : {}),
         },
       })}`
     );
