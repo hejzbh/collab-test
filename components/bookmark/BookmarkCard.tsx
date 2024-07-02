@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowLeftRightIcon } from "lucide-react";
 import React from "react";
 import Link from "next/link";
+import { truncString } from "@/utils/truncString";
 
 type Props = {
   bookmark: BookmarkWithAllDataType;
@@ -33,7 +34,7 @@ const BookmarkCard = ({ bookmark }: Props) => {
             className="w-[150px] h-[100px] object-cover rounded-lg"
           />
           <h2 className="text-black dark:text-white uppercase text-md mt-2">
-            {bookmark?.matching?.clip?.title}
+            {truncString(bookmark?.matching?.clip?.title, 20)}
           </h2>
         </div>
         {/** Icon */}
@@ -51,7 +52,7 @@ const BookmarkCard = ({ bookmark }: Props) => {
             className="w-[150px] h-[100px] object-cover rounded-lg"
           />
           <h2 className="text-black dark:text-white uppercase text-md mt-2">
-            {bookmark?.matching?.video?.title}
+            {truncString(bookmark?.matching?.video?.title, 20)}
           </h2>
         </div>
       </div>
