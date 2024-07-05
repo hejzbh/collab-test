@@ -32,6 +32,15 @@ export async function POST(req: Request) {
       },
     });
 
+    db.matching.findUnique({
+      where: {
+        id: "matching_id",
+      },
+      include: {
+        matchingMoments: true,
+      },
+    });
+
     // 6) Returning JSON response with the created clip
     return NextResponse.json(clip);
   } catch (err: any) {

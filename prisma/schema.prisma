@@ -34,6 +34,7 @@ model Clip {
     matching Matching[]
     awsUrl String? @db.String
     thumbnail String?
+    duration Int
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     @@index([userId])
@@ -45,11 +46,25 @@ model Video {
     matching Matching[]
     title String @db.String
     thumbnail String
+    duration Int
     awsUrl String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
 
+
+
+
+model Bookmark {
+    id String @id @default(uuid()) @map("_id")
+    matchingId String
+    matching Matching @relation(fields: [matchingId],references: [id],onDelete:Cascade)
+    userId String
+    user User @relation(fields: [userId],references: [id],onDelete:Cascade)
+    @@index([matchingId])
+    @@index([userId])
+
+}
 
 model Matching {
     id String @id @default(uuid()) @map("_id")
@@ -69,17 +84,6 @@ model Matching {
 
     @@index([clipId])
     @@index([videoId])
-}
-
-model Bookmark {
-    id String @id @default(uuid()) @map("_id")
-    matchingId String
-    matching Matching @relation(fields: [matchingId],references: [id],onDelete:Cascade)
-    userId String
-    user User @relation(fields: [userId],references: [id],onDelete:Cascade)
-    @@index([matchingId])
-    @@index([userId])
-
 }
 
 

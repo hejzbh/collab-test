@@ -7,6 +7,7 @@ export const dummyVideos: VideoType[] = [
     awsUrl: "/videos/fails-compilation.mp4",
     title: "2 minutes Best fails",
     thumbnail: "/images/video-thumb-1.webp",
+    duration: 103,
     createdAt: new Date(new Date().setMonth(new Date().getMonth() - 2)),
   } as VideoType,
   {
@@ -15,6 +16,7 @@ export const dummyVideos: VideoType[] = [
     awsUrl: "/videos/videoplayback.mp4",
     title: "TRY NOT TO LAUGH 1 MINUTE CHALLENGE(funny/fails)",
     thumbnail: "/images/video-thumb-2.webp",
+    duration: 63,
     createdAt: new Date(new Date().setMonth(new Date().getMonth() - 2)),
   } as VideoType,
 ];

@@ -69,7 +69,11 @@ const Matching = async ({ searchParams }: MatchingProps) => {
         <BookmarkButton className="mb-10" matchingId={matching.id} />
         <div className="flex items-center sm:items-start gap-[3em] sm:gap-5 flex-col sm:flex-row ">
           {/** Clip Details */}
-          <ClipDetails className="flex-1" clip={matching.clip} />
+          <ClipDetails
+            className="flex-1"
+            clip={matching.clip}
+            matchingMoments={matching.matchingMoments}
+          />
           {/**?  */}
           <ArrowLeftRightIcon className="sm:mt-[12em] text-textColors-primary" />
           {/** Video Details */}

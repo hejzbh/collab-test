@@ -5,6 +5,7 @@ import { useMatchingVideoPlayers } from "@/components/providers/MatchingVideoPla
 import { MatchingMoment, Video } from "@prisma/client";
 import Link from "next/link";
 import { Youtube } from "lucide-react";
+import Indicators from "./Indicators";
 
 const VideoPlayer = dynamic(() => import("./VideoPlayer"));
 
@@ -26,9 +27,16 @@ const VideoDetails = ({
     <div className={`${className}`}>
       {/** Player */}
       <VideoPlayer url={video.awsUrl as string} />
+      <Indicators
+        startTimeKey="startVideoTime"
+        endTimeKey="endVideoTime"
+        matchingMoments={matchingMoments}
+        totalVideoDuration={video.duration}
+        playMatchingMoment={playMatchingMoment}
+      />
 
       {/** Title And Description (Details) */}
-      <div className="text-left">
+      <div className="text-left mt-7">
         <h2 className="text-black dark:text-white uppercase text-lg mt-2">
           {video.title}
         </h2>
@@ -40,7 +48,7 @@ const VideoDetails = ({
           <Youtube className=" mr-2 text-[red]" />
           Youtube Link
         </Link>
-        <div className="flex flex-col">
+        {/**  <div className="flex flex-col">
           {matchingMoments?.map((moment, idx) => (
             <button
               key={idx}
@@ -51,7 +59,7 @@ const VideoDetails = ({
               Play matching moment {idx + 1}
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

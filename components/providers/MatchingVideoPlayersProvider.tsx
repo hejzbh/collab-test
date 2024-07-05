@@ -87,7 +87,8 @@ const MatchingVideoPlayersProvider = ({
       clipPlayerRef,
     }),
     [
-      isMatchingMomentInVideo,
+      // eslint-disable-line
+      isMatchingMomentInVideo, // eslint-disable-line
       clipPlayerRef,
       videoPlayerRef,
       playing,

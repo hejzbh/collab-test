@@ -16,7 +16,7 @@ const BookmarkButton = ({ className = "", matchingId }: Props) => {
   useEffect(() => {
     if (!matchingId) return;
     isMatchingInBookmark({ matchingId, userId: "1" }).then(setIsBookmarked);
-  }, [matchingId]);
+  }, [matchingId]); // eslint-disable-line
 
   async function onClick() {
     if (isBookmarked) {
