@@ -72,7 +72,7 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
           quality={60}
           alt="Clip"
           src={thumbnail || "/images/not-loaded-image.avif"}
-          className="rounded-xl w-full"
+          className="rounded-xl w-full max-h-[300px]"
         />
 
         <h2 className="text-black dark:text-white uppercase text-lg mt-2">

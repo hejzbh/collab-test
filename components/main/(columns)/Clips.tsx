@@ -30,6 +30,27 @@ const Clips = ({ clips = [], searchParams }: ClipsProps) => {
     );
   }
 
+  if (!clips?.length) {
+    const NoResultsBanner = dynamic(
+      () => import("@/components/banners/NoResultsBanner"),
+      { loading: () => null }
+    );
+    return (
+      <NoResultsBanner
+        title={
+          searchParams.columnsOrder === ColumnsOrderEnum.CLIP_VIDEO
+            ? "You have no clips"
+            : "No Matching Clips"
+        }
+        description={
+          searchParams.columnsOrder === ColumnsOrderEnum.CLIP_VIDEO
+            ? "Please upload your first clip"
+            : "There are no clips that matches selected video"
+        }
+      />
+    );
+  }
+
   return (
     <div className="p-3 md:p-10  !pb-[10rem] scrollbar-hide space-y-5 h-full overflow-y-scroll">
       {clips?.map((clip) => (

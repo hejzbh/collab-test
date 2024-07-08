@@ -43,7 +43,7 @@ const Videos = ({ videos = [], searchParams }: VideosProps) => {
       <NoResultsBanner
         title="No Matching Videos"
         description="There are no videos that match your clip"
-        secondDescription="If you uploaded the video less than 10 minutes ago, wait until search for matching videos is done."
+        secondDescription="If you uploaded the video less than 5 minutes ago, wait until search for matching videos is done."
       />
     );
   }
