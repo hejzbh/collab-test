@@ -37,6 +37,8 @@ const BookmarkButton = ({ className = "", matchingId }: Props) => {
     }
   }
 
+  if (isBookmarked === undefined) return null;
+
   return (
     <button
       onClick={onClick}
