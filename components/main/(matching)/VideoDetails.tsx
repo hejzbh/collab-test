@@ -26,7 +26,7 @@ const VideoDetails = ({ className = "", video }: VideoDetailsProps) => {
           startTimeKey="startVideoTime"
           endTimeKey="endVideoTime"
           matchingMoments={matchingMoments}
-          totalVideoDuration={Math.round(video.duration - 1)}
+          totalVideoDuration={Math.round(video.duration)}
           playMatchingMoment={playMatchingMoment}
         />
       )}
