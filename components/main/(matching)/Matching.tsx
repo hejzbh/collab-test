@@ -5,8 +5,7 @@ import dynamic from "next/dynamic";
 import { HomePageProps } from "@/app/(main)/page";
 // Icons
 import { ArrowLeftRightIcon } from "lucide-react";
-import { matchingsDummy } from "@/constants/matchings";
-import BookmarkButton from "./BookmarkButton";
+import { getMatchingDetails } from "@/lib/(matching)/get-matching-details";
 
 // Components
 const MatchingVideoPlayersProvider = dynamic(
@@ -17,6 +16,9 @@ const ClipDetails = dynamic(
 );
 const VideoDetails = dynamic(
   () => import("@/components/main/(matching)/VideoDetails")
+);
+const BookmarkButton = dynamic(
+  () => import("@/components/main/(matching)/BookmarkButton")
 );
 
 // Props
@@ -40,48 +42,27 @@ const Matching = async ({ searchParams }: MatchingProps) => {
     );
   }
 
-  // 2) if User has selected clip and video get matching details
-  const matching = matchingsDummy.find(
-    (matching) =>
-      matching.clipId === searchParams.selectedClipId &&
-      matching.videoId === searchParams.selectedVideoId
-  );
+  // 2) if User has selected clip and video, get matching details
+  const matchingDetails = await getMatchingDetails({
+    clipId: searchParams?.selectedClipId,
+    videoId: searchParams?.selectedVideoId,
+  });
 
-  // 3) If there is no matching
-  if (!matching) {
-    const NoResultsBanner = dynamic(
-      () => import("@/components/banners/NoResultsBanner"),
-      { loading: () => null }
-    );
+  if (!matchingDetails) throw new Error("Matching cannot be found");
 
-    return (
-      <NoResultsBanner
-        title="Matching Could Not Be Found"
-        description="Matching between clip and video cannot be found"
-      />
-    );
-  }
-
-  // Render matching
   return (
-    <MatchingVideoPlayersProvider matchingMoments={matching.matchingMoments}>
+    <MatchingVideoPlayersProvider
+      matchingMoments={matchingDetails?.matchingMoments}
+    >
       <div className="p-3 md:p-10 h-full !pb-[10rem] scrollbar-hide overflow-y-scroll flex flex-col items-end">
-        <BookmarkButton className="mb-10" matchingId={matching.id} />
+        <BookmarkButton className="mb-10" matchingId={matchingDetails.id} />
         <div className="flex items-center sm:items-start gap-[3em] sm:gap-5 flex-col sm:flex-row ">
           {/** Clip Details */}
-          <ClipDetails
-            className="flex-1"
-            clip={matching.clip}
-            matchingMoments={matching.matchingMoments}
-          />
+          <ClipDetails clip={matchingDetails?.clip} className="flex-1" />
           {/**?  */}
           <ArrowLeftRightIcon className="sm:mt-[12em] text-textColors-primary" />
           {/** Video Details */}
-          <VideoDetails
-            className="flex-1"
-            video={matching.video}
-            matchingMoments={matching.matchingMoments}
-          />
+          <VideoDetails video={matchingDetails?.video} className="flex-1" />
         </div>
       </div>
     </MatchingVideoPlayersProvider>

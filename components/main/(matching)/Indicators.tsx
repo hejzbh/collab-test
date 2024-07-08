@@ -1,4 +1,4 @@
-import { MatchingMoment } from "@prisma/client";
+import { MatchingMoment } from "@/types";
 import React from "react";
 
 type Props = {
@@ -17,12 +17,13 @@ const Indicators = ({
   playMatchingMoment = () => {},
 }: Props) => {
   return (
-    <div className="bg-gray-400 rounded-3xl px-1">
-      <div className="h-6 relative rounded-3xl">
-        {matchingMoments.map((moment, index) => {
-          const videoDuration = moment[endTimeKey] - moment[startTimeKey];
-          let indicatorWidth = (videoDuration / totalVideoDuration) * 100;
+    <div className="bg-gray-400 rounded-3xl px-1 mt-[3px] mb-5">
+      <div className="h-6 relative rounded-3xl overflow-hidden">
+        {matchingMoments?.map((moment, index) => {
+          const clipInVideoDuration = moment[endTimeKey] - moment[startTimeKey];
+          let indicatorWidth = (clipInVideoDuration / totalVideoDuration) * 100;
           indicatorWidth = indicatorWidth <= 5 ? 10 : indicatorWidth;
+
           return (
             <div
               onClick={() => playMatchingMoment(moment)}

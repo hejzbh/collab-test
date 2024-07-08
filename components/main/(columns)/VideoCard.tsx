@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { HomePageProps } from "@/app/(main)/page";
 import { generateNewQuery } from "@/utils/generate-new-query";
 import { useMemo } from "react";
-import { timeAgo } from "@/utils/timeAgo";
+import { ColumnsOrderEnum } from "@/types";
 
 // Props
 interface VideoCardProps {
@@ -29,6 +29,9 @@ const VideoCard = ({ video, searchParams }: VideoCardProps) => {
         searchParams,
         newSearchParams: {
           selectedVideoId: video.id,
+          ...(searchParams.columnsOrder === ColumnsOrderEnum.VIDEO_CLIP
+            ? { selectedClipId: null }
+            : {}),
         },
       })}`
     );
@@ -44,7 +47,6 @@ const VideoCard = ({ video, searchParams }: VideoCardProps) => {
           <span className="shadow-xl">Selected</span>
         </div>
       )}
-
       <div className={isVideoClicked ? "opacity-80" : ""}>
         <Image
           loading="lazy"
@@ -53,14 +55,11 @@ const VideoCard = ({ video, searchParams }: VideoCardProps) => {
           quality={60}
           alt="Clip"
           src={video?.thumbnail || "/images/not-loaded-image.avif"}
-          className="rounded-xl w-full h-[200px] object-cover"
+          className="rounded-xl w-full"
         />
         <h2 className="text-black dark:text-white uppercase text-lg mt-2">
           {video?.title}
         </h2>
-        <p className="text-black/60 dark:text-white/60 text-[15px]">
-          {timeAgo(video.createdAt)}
-        </p>
       </div>
     </div>
   );

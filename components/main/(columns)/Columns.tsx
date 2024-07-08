@@ -9,10 +9,10 @@ import {
 import { Clip, Video } from "@prisma/client";
 import { HomePageProps } from "@/app/(main)/page";
 import { ColumnsOrderEnum } from "@/types";
-const ColumnsOrderToggler = dynamic(() => import("./ColumnsOrderToggler"));
 const Clips = dynamic(() => import("./Clips"));
 const Videos = dynamic(() => import("./Videos"));
 const Matching = dynamic(() => import("../(matching)/Matching"));
+const ColumnsOrderToggler = dynamic(() => import("./ColumnsOrderToggler"));
 
 // Props
 interface ColumnsProps {

@@ -1,10 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import dynamic from "next/dynamic";
 // Icons
 import { MoveUpIcon, MoveDownIcon } from "lucide-react";
 import { sortOptions } from "@/constants/sortOptions";
+import { SortOptionType } from "@/types";
+import { useRouter, useSearchParams } from "next/navigation";
+import { generateNewQuery } from "@/utils/generate-new-query";
+import { convertQsToObject } from "@/utils/convert-qs-to-object";
 // Components
 const ClickExpandable = dynamic(
   () => import("@/components/ui/ClickExpandable")
@@ -16,7 +20,14 @@ interface SortByProps {
 }
 
 const SortBy = ({}: SortByProps) => {
-  const [direction, setDirection] = useState<"asc" | "desc">("asc");
+  const router = useRouter();
+  const searchParamsQuery = useSearchParams();
+
+  function selectOption(option: SortOptionType) {
+    return option;
+  }
+
+  const searchParams: any = convertQsToObject(searchParamsQuery.entries());
 
   return (
     <ClickExpandable
@@ -31,8 +42,17 @@ const SortBy = ({}: SortByProps) => {
             onClick={(e) => {
               e.stopPropagation();
 
-              setDirection((direction) =>
-                direction === "asc" ? "desc" : "asc"
+              router.push(
+                `/?${generateNewQuery({
+                  searchParams,
+                  newSearchParams: {
+                    sortDirection: searchParams?.sortDirection
+                      ? searchParams.sortDirection === "asc"
+                        ? "desc"
+                        : "asc"
+                      : "desc",
+                  },
+                })}`
               );
             }}
             title="Sort Direction"
@@ -40,12 +60,14 @@ const SortBy = ({}: SortByProps) => {
           >
             <MoveUpIcon
               className={`p-0 w-[17px] md:w-[21px] ${
-                direction === "asc" && "text-textColors-blue"
+                searchParams?.sortDirection === "asc" && "text-textColors-blue"
               }`}
             />
             <MoveDownIcon
               className={`p-0 w-[17px] md:w-[21px] ${
-                direction === "desc" && "text-textColors-blue"
+                (searchParams?.sortDirection === "desc" ||
+                  !searchParams?.sortDirection) &&
+                "text-textColors-blue"
               }`}
             />
           </button>
@@ -55,6 +77,7 @@ const SortBy = ({}: SortByProps) => {
       <ul className="bg-white dark:bg-black text-textColors-primary rounded-xl">
         {sortOptions?.map((option, idx) => (
           <li
+            onClick={() => selectOption(option)}
             className="flex items-center space-x-2 p-2 cursor-pointer"
             key={idx}
           >

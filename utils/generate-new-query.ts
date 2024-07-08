@@ -4,7 +4,7 @@ export const generateNewQuery = ({
   searchParams,
   newSearchParams,
 }: {
-  searchParams: HomePageProps["searchParams"];
+  searchParams: Partial<HomePageProps>["searchParams"];
   newSearchParams: any;
 }) => {
   // 1)

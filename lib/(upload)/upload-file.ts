@@ -4,7 +4,7 @@ export const uploadFile = async (file: File) => {
   try {
     // 1) Make call to get presigned url
     const presignedDataResponse = await axios.get(
-      process.env.NEXT_PUBLIC_AWS_VIDEO_URL! + "mp4" + "/clip" //todo
+      process.env.NEXT_PUBLIC_AWS_VIDEO_URL! + "/clip" //todo
     );
 
     const presignedData = presignedDataResponse?.data;

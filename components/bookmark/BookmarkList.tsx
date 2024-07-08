@@ -1,4 +1,4 @@
-import { BookmarkWithAllDataType } from "@/types";
+import { BookmarkAllData } from "@/types";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -8,7 +8,7 @@ const BookmarkCard = dynamic(
 
 type Props = {
   className?: string;
-  bookmarks: BookmarkWithAllDataType[];
+  bookmarks: BookmarkAllData[];
 };
 
 const BookmarkList = ({ bookmarks, className = "" }: Props) => {

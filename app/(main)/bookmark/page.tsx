@@ -1,7 +1,7 @@
 import React from "react";
-import { getUserBookmark } from "@/lib/(user)/get-user-bookmark";
 import { currentUser } from "@clerk/nextjs/server";
 import dynamic from "next/dynamic";
+import { getUserBookmark } from "@/lib/(user)/get-user-bookmark";
 
 const BookmarksList = dynamic(
   () => import("@/components/bookmark/BookmarkList")
@@ -12,18 +12,13 @@ async function getBookmarks() {
 
   if (!user) throw new Error("Unauthorized");
 
-  const bookmarks = await getUserBookmark(user.id);
+  const data = await getUserBookmark(user.id);
 
-  /**await db.bookmark.findMany({
-    where: {
-      userId: user?.id,
-    },
-  }); */
-  return bookmarks;
+  return data;
 }
 
 const BookmarkPage = async () => {
-  const bookmarks = await getBookmarks();
+  const { bookmarks } = await getBookmarks();
 
   if (!bookmarks || (bookmarks && !bookmarks.length)) {
     const NoResultsBanner = dynamic(
@@ -31,12 +26,7 @@ const BookmarkPage = async () => {
       { loading: () => null }
     );
 
-    return (
-      <NoResultsBanner
-        title="You don't have any saved matching"
-        description=""
-      />
-    );
+    return <NoResultsBanner title="You have no saved matches" description="" />;
   }
 
   return (

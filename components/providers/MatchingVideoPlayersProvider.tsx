@@ -1,5 +1,5 @@
 "use client";
-import { MatchingMoment } from "@prisma/client";
+import { MatchingMoment } from "@/types";
 import React, {
   createContext,
   useContext,
@@ -23,6 +23,7 @@ export type MatchingVideoPlayersValue = {
     clip: boolean;
     video: boolean;
   };
+  matchingMoments: MatchingMoment[];
   setPlaying: React.SetStateAction<any>;
   playMatchingMoment: (moment: MatchingMoment) => void; // eslint-disable-line
   handleClipProgress: (params: { playedSeconds: number }) => void; // eslint-disable-line
@@ -33,7 +34,7 @@ const MatchingVideoPlayersContext = createContext({});
 
 const MatchingVideoPlayersProvider = ({
   children,
-  matchingMoments,
+  matchingMoments = [],
 }: MatchingVideoPlayersProviderProps) => {
   const clipPlayerRef: any = useRef();
   const videoPlayerRef: any = useRef();
@@ -74,6 +75,7 @@ const MatchingVideoPlayersProvider = ({
     setPlaying({ video: true, clip: true });
   }
 
+  /* eslint-disable */
   const value: MatchingVideoPlayersValue = useMemo(
     () => ({
       handleClipProgress,
@@ -85,15 +87,16 @@ const MatchingVideoPlayersProvider = ({
       isMatchingMomentInClip,
       videoPlayerRef,
       clipPlayerRef,
+      matchingMoments,
     }),
     [
-      // eslint-disable-line
-      isMatchingMomentInVideo, // eslint-disable-line
+      isMatchingMomentInVideo,
       clipPlayerRef,
       videoPlayerRef,
       playing,
       isMatchingMomentInClip,
-    ] // eslint-disable-line
+      matchingMoments,
+    ]
   );
 
   return (

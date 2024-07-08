@@ -10,10 +10,11 @@ interface VideoPlayerProps {
   url: string;
 }
 
-const VideoPlayer = ({ url }: VideoPlayerProps) => {
+const VideoPlayer = ({ url = "" }: VideoPlayerProps) => {
   const {
     videoPlayerRef,
     isMatchingMomentInVideo,
+
     handleVideoProgress,
     playing,
     setPlaying,
@@ -29,8 +30,8 @@ const VideoPlayer = ({ url }: VideoPlayerProps) => {
       {/** Player */}
       <ReactPlayer
         controls
-        ref={videoPlayerRef}
         muted
+        ref={videoPlayerRef}
         width={"100%"}
         playing={playing.video}
         onPause={() =>

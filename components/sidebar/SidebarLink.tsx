@@ -19,7 +19,11 @@ const SidebarLink = ({ link, expanded }: SidebarLinkProps) => {
   return (
     <Link
       title={link.title}
-      href={link.href + `?refreshParam=${Math.random()}`}
+      href={`${link.href}${
+        link.href === "/bookmark"
+          ? `?searchParam=${Math.random().toString()}`
+          : ""
+      }`}
       className={clsx(
         "flex items-center rounded-xl py-2 group transition-all duration-200 ease-in-out",
         {

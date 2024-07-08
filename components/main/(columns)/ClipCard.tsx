@@ -1,13 +1,14 @@
 "use client";
 
 import { Clip } from "@prisma/client";
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { HomePageProps } from "@/app/(main)/page";
 import { generateNewQuery } from "@/utils/generate-new-query";
 import { clsx } from "@/utils/clsx";
 import { timeAgo } from "@/utils/timeAgo";
+import axios from "axios";
 import { ColumnsOrderEnum } from "@/types";
 
 // Props
@@ -18,10 +19,20 @@ interface ClipCardProps {
 }
 
 const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
+  const [thumbnail, setThumbnail] = useState<string>("");
   const isClipClicked = useMemo(
     () => clip?.id === searchParams?.selectedClipId,
     [clip?.id, searchParams?.selectedClipId]
   );
+
+  // TODO: Cookies and aws thumbnail expiration date
+  useEffect(() => {
+    if (!clip?.id) return;
+
+    axios
+      .post(process.env.NEXT_PUBLIC_AWS_VIDEO_URL! + `/s3/${clip.awsKey}_0.jpg`)
+      .then((response) => setThumbnail(response.data?.url));
+  }, [clip?.id]);
 
   const router = useRouter();
 
@@ -38,6 +49,8 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
       })}`
     );
   };
+
+  if (!clip) return null;
 
   return (
     <div
@@ -58,16 +71,13 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
           height={500}
           quality={60}
           alt="Clip"
-          src={clip?.thumbnail || "/images/not-loaded-image.avif"}
-          className="rounded-xl w-full h-[200px] object-cover"
+          src={thumbnail || "/images/not-loaded-image.avif"}
+          className="rounded-xl w-full"
         />
 
         <h2 className="text-black dark:text-white uppercase text-lg mt-2">
           {clip?.title}
         </h2>
-        <p className="text-black/60 dark:text-white/60 text-[15px]">
-          {clip.description}
-        </p>
         <p className="text-black/60 dark:text-white/60 text-[15px]">
           {timeAgo(clip.createdAt)}
         </p>

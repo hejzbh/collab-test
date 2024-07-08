@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid()) @map("_id")
+  id String @id @default(uuid()) @map("_id") 
   email String @db.String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -23,41 +23,55 @@ model User {
 }
 
 
-
-
 model Clip {
-    id String @id @default(uuid()) @map("_id")
+    id String   @id @default(auto()) @map("_id") @db.ObjectId
     title String @db.String
     description String? @db.String
     userId String
+    awsKey String 
     user User @relation(fields: [userId],references: [id],onDelete:Cascade)
     matching Matching[]
-    awsUrl String? @db.String
     thumbnail String?
-    duration Int
     createdAt DateTime @default(now())
+    duration Int?
     updatedAt DateTime @updatedAt
     @@index([userId])
 } 
 
 model Video {
-    id String @id @default(uuid()) @map("_id")
+      id String   @id @default(auto()) @map("_id") @db.ObjectId
+    awsKey String 
     youtubeId String @db.String @unique
     matching Matching[]
     title String @db.String
-    thumbnail String
-    duration Int
-    awsUrl String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    thumbnail String?
+    duration Int?
 }
 
 
+model Matching {
+    id String   @id @default(auto()) @map("_id") @db.ObjectId
+    clipId String  @db.ObjectId
+    clip Clip @relation(fields: [clipId], references: [id] ,onDelete:Cascade)
 
+    videoId String  @db.ObjectId
+    video Video @relation(fields: [videoId], references: [id] ,onDelete:Cascade)
+
+    videoAwsKey String
+    clipAwsKey String 
+
+    matchingMoments Json
+
+
+    bookmarks Bookmark[]
+
+    @@index([clipId])
+    @@index([videoId])
+}
 
 model Bookmark {
-    id String @id @default(uuid()) @map("_id")
-    matchingId String
+    id String @id @default(uuid()) @map("_id") 
+    matchingId String  @db.ObjectId
     matching Matching @relation(fields: [matchingId],references: [id],onDelete:Cascade)
     userId String
     user User @relation(fields: [userId],references: [id],onDelete:Cascade)
@@ -66,36 +80,4 @@ model Bookmark {
 
 }
 
-model Matching {
-    id String @id @default(uuid()) @map("_id")
-
-    clipId String
-    clip Clip @relation(fields: [clipId],references: [id],onDelete:Cascade)
-
-    videoId String
-    video Video @relation(fields: [videoId],references: [id],onDelete:Cascade)
-
-    matchingMoments MatchingMoment[]
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    bookmarks Bookmark[]
-
-    @@index([clipId])
-    @@index([videoId])
-}
-
-
-model MatchingMoment {
-   id String @id @default(uuid()) @map("_id")
-   startClipTime Int
-   endClipTime Int
-   startVideoTime Int
-   endVideoTime Int
-   matchingId String
-   matching Matching @relation(fields: [matchingId],references: [id],onDelete:Cascade)
-   
-   @@index([matchingId])
-}
 

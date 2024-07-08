@@ -21,23 +21,16 @@ export async function POST(req: Request) {
     // 4) Throw error if there is no user (Impossible, but to make sure we have that.)
     if (!user) throw new Error("Unauthorized");
 
-    // 5) Creating a new clip in the database
-    //_0.jpg TODO
+    // 5) Get thumbnail (first frame) //clip_9bcf3b4a-e6ab-4894-8177-9671a6f14653.mp4_0.jpg TODO
+
+    // 6) Creating a new clip in the database
     const clip = await db.clip.create({
       data: {
-        id: awsClipId,
+        awsKey: awsClipId,
         title,
         description,
         userId: user?.id,
-      },
-    });
-
-    db.matching.findUnique({
-      where: {
-        id: "matching_id",
-      },
-      include: {
-        matchingMoments: true,
+        thumbnail: "",
       },
     });
 

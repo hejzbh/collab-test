@@ -1,4 +1,4 @@
-import { BookmarkWithAllDataType } from "@/types";
+import { BookmarkAllData } from "@/types";
 import Image from "next/image";
 import { ArrowLeftRightIcon } from "lucide-react";
 import React from "react";
@@ -6,7 +6,7 @@ import Link from "next/link";
 import { truncString } from "@/utils/truncString";
 
 type Props = {
-  bookmark: BookmarkWithAllDataType;
+  bookmark: BookmarkAllData;
 };
 
 const BookmarkCard = ({ bookmark }: Props) => {

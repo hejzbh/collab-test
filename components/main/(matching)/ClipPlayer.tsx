@@ -9,20 +9,18 @@ interface ClipPlayerProps {
   url: string;
 }
 
-const ClipPlayer = ({ url }: ClipPlayerProps) => {
+const ClipPlayer = ({ url = "" }: ClipPlayerProps) => {
   const { clipPlayerRef, handleClipProgress, playing, setPlaying } =
     useMatchingVideoPlayers();
 
   return (
     <div className="relative z-[1] h-[350px]">
-      {/** Matching moment */}
-
       {/** Player */}
       <ReactPlayer
         controls
+        muted
         ref={clipPlayerRef}
         width={"100%"}
-        muted
         playing={playing.clip}
         onPause={() =>
           setPlaying((playingData: { video: boolean; clip: boolean }) => ({

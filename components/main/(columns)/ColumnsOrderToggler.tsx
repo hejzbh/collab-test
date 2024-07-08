@@ -19,6 +19,9 @@ const ColumnsOrderToggler = ({ className = "", searchParams }: Props) => {
       `/?${generateNewQuery({
         searchParams,
         newSearchParams: {
+          selectedClipId: null,
+          q: null,
+          selectedVideoId: null,
           columnsOrder:
             searchParams.columnsOrder === ColumnsOrderEnum.CLIP_VIDEO
               ? ColumnsOrderEnum.VIDEO_CLIP

@@ -1,7 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { BookmarkIcon, BookmarkCheck } from "lucide-react";
-import { useBookmark } from "@/store/bookmark-store";
+import { addToBookmark } from "@/lib/(bookmark)/add-to-bookmark";
+import { useUser } from "@clerk/nextjs";
+import { isMatchingBookmarked } from "@/lib/(bookmark)/is-matching-bookmarked";
+import { removeFromBookmark } from "@/lib/(bookmark)/remove-from-bookmark";
 
 type Props = {
   className?: string;
@@ -9,28 +12,30 @@ type Props = {
 };
 
 const BookmarkButton = ({ className = "", matchingId }: Props) => {
+  const { user } = useUser();
   const [isBookmarked, setIsBookmarked] = useState<boolean | undefined>();
-  const { isMatchingInBookmark, removeFromBookmark, addToBookmark } =
-    useBookmark();
 
   useEffect(() => {
-    if (!matchingId) return;
-    isMatchingInBookmark({ matchingId, userId: "1" }).then(setIsBookmarked);
-  }, [matchingId]); // eslint-disable-line
+    if (!matchingId || !user?.id) return;
+
+    isMatchingBookmarked({ matchingId, userId: user?.id }).then(
+      setIsBookmarked
+    );
+  }, [matchingId, user?.id]); // eslint-disable-line
 
   async function onClick() {
+    if (!user) return;
+
     if (isBookmarked) {
-      removeFromBookmark({ matchingId, userId: "1" }).then(() =>
+      removeFromBookmark({ matchingId, userId: user?.id }).then(() =>
         setIsBookmarked(false)
       );
     } else {
-      addToBookmark({ matchingId, userId: "1" }).then(() =>
+      addToBookmark({ matchingId, userId: user?.id }).then(() =>
         setIsBookmarked(true)
       );
     }
   }
-
-  if (isBookmarked === undefined) return null;
 
   return (
     <button
