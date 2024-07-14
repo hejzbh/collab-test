@@ -32,7 +32,7 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
     axios
       .post(process.env.NEXT_PUBLIC_AWS_VIDEO_URL! + `/s3/${clip.awsKey}_0.jpg`)
       .then((response) => setThumbnail(response.data?.url));
-  }, [clip?.id]);
+  }, [clip?.id, clip?.awsKey]);
 
   const router = useRouter();
 

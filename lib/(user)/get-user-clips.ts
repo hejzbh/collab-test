@@ -33,6 +33,6 @@ export const getUserClips = async (params: Params) => {
 
     return clips;
   } catch (err: any) {
-    throw new Error(err.response.data.message || err.message);
+    throw new Error(err?.response?.data?.message || err.message);
   }
 };

@@ -17,11 +17,11 @@ export const getMatchingVideos = async (params: Params) => {
     });
 
     // 2)
-    const matchingVideos = matchings.map((matching) => matching.video);
+    const matchingVideos = matchings?.map((matching) => matching.video);
 
     // 3)
     return matchingVideos;
   } catch (err: any) {
-    throw new Error(err.message);
+    throw new Error(err?.response?.data?.message || err.message);
   }
 };

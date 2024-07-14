@@ -22,6 +22,6 @@ export const getAllVideos = async (params: Params) => {
     // 2)
     return videos;
   } catch (err: any) {
-    throw new Error(err.message);
+    throw new Error(err?.response?.data?.message || err.message);
   }
 };

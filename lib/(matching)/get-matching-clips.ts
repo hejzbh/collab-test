@@ -27,11 +27,11 @@ export const getMatchingClips = async (params: Params) => {
     });
 
     // 3)
-    const matchingClips = matchings.map((matching) => matching.clip);
+    const matchingClips = matchings?.map((matching) => matching.clip);
 
     // 4)
     return matchingClips;
   } catch (err: any) {
-    throw new Error(err.message);
+    throw new Error(err?.response?.data?.message || err.message);
   }
 };
