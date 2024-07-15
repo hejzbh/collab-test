@@ -14,7 +14,7 @@ const ClipPlayer = ({ url = "" }: ClipPlayerProps) => {
     useMatchingVideoPlayers();
 
   return (
-    <div className="relative z-[1] h-[350px]">
+    <div className="relative z-[1] h-[350px] overflow-hidden">
       {/** Player */}
       <ReactPlayer
         controls
@@ -35,7 +35,7 @@ const ClipPlayer = ({ url = "" }: ClipPlayerProps) => {
           }))
         }
         height={"100%"}
-        style={{ zIndex: "-1", objectFit: "cover" }}
+        style={{ zIndex: "-1", objectFit: "cover", borderRadius: "0.35rem" }}
         url={url}
         onProgress={handleClipProgress}
       />
