@@ -16,6 +16,8 @@ const config: Config = {
         "bgColors-modal": "var(--bg-modal)",
         "bgColors-input": "var(--bg-input)",
         "bgColors-blue": "#3ea6ff",
+        "bgColors-tabs": "var(--bg-tabs)",
+        "bgColors-tab": "var(--bg-tab)",
         // Text
         "textColors-primary": "var(--text-primary)",
         "textColors-secondary": "var(--text-secondary)",

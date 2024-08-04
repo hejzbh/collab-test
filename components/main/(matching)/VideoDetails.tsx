@@ -16,7 +16,7 @@ interface VideoDetailsProps {
 
 const VideoDetails = ({ className = "", video }: VideoDetailsProps) => {
   const { playMatchingMoment, matchingMoments } = useMatchingVideoPlayers();
-
+  console.log(matchingMoments);
   return (
     <div className={`${className}`}>
       {/** Player */}
@@ -42,6 +42,19 @@ const VideoDetails = ({ className = "", video }: VideoDetailsProps) => {
             playMatchingMoment={playMatchingMoment}
           />
         )}
+      </div>
+
+      <div className="flex flex-col space-y-4 items-start mt-5">
+        {matchingMoments?.map((moment, idx) => (
+          <button
+            key={idx}
+            title={`Play matching moment`}
+            className="text-[15px] text-textColors-blue underline"
+            onClick={() => playMatchingMoment(moment)}
+          >
+            Play matching moment {idx + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

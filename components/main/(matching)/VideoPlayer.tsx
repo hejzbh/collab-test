@@ -14,7 +14,6 @@ const VideoPlayer = ({ url = "" }: VideoPlayerProps) => {
   const {
     videoPlayerRef,
     isMatchingMomentInVideo,
-
     handleVideoProgress,
     playing,
     setPlaying,
@@ -24,7 +23,7 @@ const VideoPlayer = ({ url = "" }: VideoPlayerProps) => {
     <div className="relative z-[1] overflow-hidden h-[350px]">
       {/** Matching moment */}
       {isMatchingMomentInVideo && (
-        <MatchingBadge className="absolute bottom-14 left-10" />
+        <MatchingBadge className="absolute bottom-24 left-10" />
       )}
 
       {/** Player */}

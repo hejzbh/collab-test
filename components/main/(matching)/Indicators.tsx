@@ -34,7 +34,9 @@ const Indicators = ({
                 left: `${(moment[startTimeKey] / totalVideoDuration) * 100}%`,
                 width: `${indicatorWidth}%`,
               }}
-            ></div>
+            >
+              <span className="p-2 bg-gray-400"></span>
+            </div>
           );
         })}
       </div>

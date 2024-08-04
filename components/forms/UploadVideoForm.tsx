@@ -10,19 +10,19 @@ const Dropzone = dynamic(() => import("@/components/ui/Dropzone"));
 const Loader = dynamic(() => import("@/components/ui/Loader"));
 
 // Props
-interface UploadClipFormProps {
+interface Props {
   className?: string;
   onSuccess?: () => void;
 }
 
-export interface UploadClipFormData {
+export interface FormData {
   file: File | undefined;
   title: string;
   description?: string;
 }
 
-const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
-  const [formData, setFormData] = useState<UploadClipFormData>({
+const UploadVideoForm = ({ onSuccess = () => {} }: Props) => {
+  const [formData, setFormData] = useState<FormData>({
     title: "",
     description: "",
     file: undefined,
@@ -54,7 +54,7 @@ const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
       // Upload file
       const uploadedFileKey = await uploadFile(formData.file as File);
 
-      // Upload clip
+      // Upload video
       await axios.post(`/api/upload-clip`, {
         data: {
           title: formData.title,
@@ -63,11 +63,11 @@ const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
         },
       });
 
-      // If we've successfully  uploaded clip, show success notification to user and clear form data
+      // If we've successfully  uploaded video, show success notification to user and clear form data
       showNotification({
         variant: "success",
-        title: "Upload Clip",
-        message: "You've successfully uploaded clip!",
+        title: "Upload Video",
+        message: "You've successfully uploaded Video!",
       });
 
       setFormData({
@@ -83,7 +83,7 @@ const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
       // Handle errors
       showNotification({
         variant: "error",
-        title: "Upload Clip",
+        title: "Upload Video Error",
         message: err.message,
       });
     } finally {
@@ -114,7 +114,7 @@ const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
         {/** Upload Video */}
         <div>
           <label htmlFor="upload" className="text-textColors-label block mb-1">
-            Clip
+            Video
           </label>
           <Dropzone
             onChange={onVideoFileChange}
@@ -163,4 +163,4 @@ const UploadClipForm = ({ onSuccess = () => {} }: UploadClipFormProps) => {
   );
 };
 
-export default UploadClipForm;
+export default UploadVideoForm;

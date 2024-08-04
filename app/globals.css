@@ -11,6 +11,8 @@
     --bg-sidebar: #ffff;
     --bg-modal: #ffff;
     --bg-input: #f2f2f2;
+    --bg-tabs: #f4f4f5;
+    --bg-tab: #ffff;
     /* Text */
     --text-primary: #5c5a5a;
     --text-secondary: #767676;
@@ -30,6 +32,8 @@
     --bg-sidebar: #282828;
     --bg-modal: #1b1c20;
     --bg-input: #16151a;
+    --bg-tabs: #27272a;
+    --bg-tab: #09090b;
     /* Text */
     --text-primary: #f1f0f0;
     --text-secondary: #aaa;

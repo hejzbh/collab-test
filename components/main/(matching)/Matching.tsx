@@ -6,6 +6,7 @@ import { HomePageProps } from "@/app/(main)/page";
 // Icons
 import { ArrowLeftRightIcon } from "lucide-react";
 import { getMatchingDetails } from "@/lib/(matching)/get-matching-details";
+import { filterUniqueMatchingMoments } from "@/utils/unique-matching-moments";
 
 // Components
 const MatchingVideoPlayersProvider = dynamic(
@@ -49,10 +50,13 @@ const Matching = async ({ searchParams }: MatchingProps) => {
   });
 
   if (!matchingDetails) throw new Error("Matching cannot be found");
-
+  console.log(matchingDetails.matchingMoments);
   return (
     <MatchingVideoPlayersProvider
-      matchingMoments={matchingDetails?.matchingMoments}
+      matchingMoments={filterUniqueMatchingMoments(
+        matchingDetails?.matchingMoments,
+        10
+      )}
     >
       <div className="p-3 md:p-10 h-full !pb-[10rem] scrollbar-hide overflow-y-scroll flex flex-col items-end">
         <BookmarkButton className="mb-10" matchingId={matchingDetails.id} />
