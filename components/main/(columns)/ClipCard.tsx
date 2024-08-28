@@ -37,6 +37,8 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
   const router = useRouter();
 
   const onClick = () => {
+    if (clip.status !== "finished") return;
+
     router.push(
       `/?${generateNewQuery({
         searchParams,
@@ -55,7 +57,9 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
   return (
     <div
       className={clsx(
-        "w-full cursor-pointer relative transition-all duration-300 ease-in-out hover:scale-105 hover:opacity-90"
+        `w-full relative transition-all duration-300 ease-in-out hover:scale-105 hover:opacity-90 ${
+          clip.status === "finished" ? "cursor-pointer" : "cursor-wait"
+        }`
       )}
       onClick={onClick}
     >
@@ -81,6 +85,12 @@ const ClipCard = ({ clip, searchParams }: ClipCardProps) => {
         <p className="text-black/60 dark:text-white/60 text-[15px]">
           {timeAgo(clip.createdAt)}
         </p>
+        {clip.status && (
+          <p className="text-black/60 dark:text-white/60 text-[15px]">
+            Status:{" "}
+            <span className="font-semibold">{clip.status?.toUpperCase()}</span>
+          </p>
+        )}
       </div>
     </div>
   );

@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 
 // Components
 const Button = dynamic(() => import("@/components/ui/Button"));
-const Dropzone = dynamic(() => import("@/components/ui/Dropzone"));
 const Loader = dynamic(() => import("@/components/ui/Loader"));
 
 // Props
@@ -16,21 +15,17 @@ interface Props {
 }
 
 export interface FormData {
-  file: File | undefined;
-  title: string;
-  description?: string;
+  videoUrl: string;
 }
 
 const UploadVideoForm = ({ onSuccess = () => {} }: Props) => {
   const [formData, setFormData] = useState<FormData>({
-    title: "",
-    description: "",
-    file: undefined,
+    videoUrl: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
 
   const isSubmitDisabled = useMemo(
-    () => !formData.file || !formData.title || loading,
+    () => !formData.videoUrl || loading,
     [formData, loading]
   );
 
@@ -46,20 +41,10 @@ const UploadVideoForm = ({ onSuccess = () => {} }: Props) => {
     setLoading(true);
 
     try {
-      // Import upload file function
-      const uploadFile = await import("@/lib/(upload)/upload-file").then(
-        ({ uploadFile }) => uploadFile
-      );
-
-      // Upload file
-      const uploadedFileKey = await uploadFile(formData.file as File);
-
       // Upload video
-      await axios.post(`/api/upload-clip`, {
+      await axios.post(`/api/upload-video`, {
         data: {
-          title: formData.title,
-          description: formData.description,
-          awsClipId: uploadedFileKey,
+          youtubeLink: formData?.videoUrl,
         },
       });
 
@@ -71,9 +56,7 @@ const UploadVideoForm = ({ onSuccess = () => {} }: Props) => {
       });
 
       setFormData({
-        title: "",
-        description: "",
-        file: undefined,
+        videoUrl: "",
       });
 
       router.refresh();
@@ -98,55 +81,25 @@ const UploadVideoForm = ({ onSuccess = () => {} }: Props) => {
       [e.target.name]: e.target.value,
     }));
 
-  const onVideoFileChange = (file: File | undefined) =>
-    setFormData((formData) => ({
-      ...formData,
-      file,
-    }));
-
   return (
-    <form onSubmit={onFormSubmit} className=" w-full">
+    <form onSubmit={onFormSubmit} className="w-full">
       {/** Loader */}
       {loading && <Loader className="mx-auto" size={55} />}
 
       {/** Fields */}
       <div className={`space-y-8 ${loading && "opacity-70"}`}>
-        {/** Upload Video */}
-        <div>
-          <label htmlFor="upload" className="text-textColors-label block mb-1">
-            Video
-          </label>
-          <Dropzone
-            onChange={onVideoFileChange}
-            allowedFileExtenstions={["mp4"]}
-          />
-        </div>
-
         {/** Title */}
         <div>
-          <label htmlFor="title" className="text-textColors-label block mb-1">
-            Title
-          </label>
-          <input
-            name="title"
-            onChange={onInputChange}
-            value={formData?.title}
-            className="w-full outline-none rounded-xl p-3 bg-bgColors-input text-sm md:text-[16px] text-textColors-primary border-[1px] border-[#D8D7D5] dark:border-none "
-          />
-        </div>
-
-        {/** Description */}
-        <div>
           <label
-            htmlFor="description"
+            htmlFor="videoUrl"
             className="text-textColors-label block mb-1"
           >
-            Description <span className="text-[13px] ml-1">{"(optional)"}</span>
+            Youtube Video URL
           </label>
           <input
-            name="description"
+            name="videoUrl"
             onChange={onInputChange}
-            value={formData?.description}
+            value={formData?.videoUrl}
             className="w-full outline-none rounded-xl p-3 bg-bgColors-input text-sm md:text-[16px] text-textColors-primary border-[1px] border-[#D8D7D5] dark:border-none "
           />
         </div>

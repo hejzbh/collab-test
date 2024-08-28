@@ -24,6 +24,8 @@ const VideoCard = ({ video, searchParams }: VideoCardProps) => {
   const router = useRouter();
 
   const onClick = () => {
+    if (video.status !== "finished") return;
+
     router.push(
       `/?${generateNewQuery({
         searchParams,
@@ -40,7 +42,9 @@ const VideoCard = ({ video, searchParams }: VideoCardProps) => {
   return (
     <div
       onClick={onClick}
-      className="w-full cursor-pointer  relative transition-all duration-300 ease-in-out hover:scale-105 hover:opacity-90"
+      className={`w-full  relative transition-all duration-300 ease-in-out hover:scale-105 hover:opacity-90 ${
+        video.status === "finished" ? "cursor-pointer" : "cursor-wait"
+      }`}
     >
       {isVideoClicked && (
         <div className="ribbon ribbon-top-left z-10 ">
@@ -60,6 +64,12 @@ const VideoCard = ({ video, searchParams }: VideoCardProps) => {
         <h2 className="text-black dark:text-white uppercase text-lg mt-2">
           {video?.title}
         </h2>
+        {video.status && (
+          <p className="text-black/60 dark:text-white/60 text-[15px]">
+            Status:{" "}
+            <span className="font-semibold">{video.status?.toUpperCase()}</span>
+          </p>
+        )}
       </div>
     </div>
   );

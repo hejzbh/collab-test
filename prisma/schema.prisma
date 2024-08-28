@@ -35,6 +35,7 @@ model Clip {
     createdAt DateTime @default(now())
     duration Int?
     updatedAt DateTime @updatedAt
+    status String?
     @@index([userId])
 } 
 
@@ -45,6 +46,7 @@ model Video {
     matching Matching[]
     title String @db.String
     thumbnail String?
+    status String?
     duration Int?
 }
 
