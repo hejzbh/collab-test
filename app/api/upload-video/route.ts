@@ -22,10 +22,9 @@ export async function POST(req: Request) {
     if (!user) throw new Error("Unauthorized");
 
     // 6) Posting video to backend
-    const video = await axios.post(
-      process.env.NEXT_PUBLIC_AWS_VIDEO_URL + "/video",
-      { youtubeLink }
-    );
+    const video = axios.post(process.env.NEXT_PUBLIC_AWS_VIDEO_URL + "/video", {
+      youtubeLink,
+    });
 
     // 6) Returning JSON response with the uploaded video
     return NextResponse.json(video);
